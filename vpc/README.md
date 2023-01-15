@@ -3,7 +3,7 @@
 
 This module builds a VPC with the default CIDR range of `10.0.0.0/16`, three subnets in a "public" configuration (attached to and routed through an AWS Internet Gateway) and three subnets in a "private" configuration (attached to and routed through three separate AWS NAT Gateways):
 
-![AWS VPC illustration](https://raw.githubusercontent.com/moritzheiber/terraform-aws-core-modules/main/files/aws_vpc.png)
+![AWS VPC illustration](https://raw.githubusercontent.com/AndroidNextdoor/aws-core-modules-tf/main/files/aws_vpc.png)
 
 ### Usage example
 
@@ -11,7 +11,7 @@ Add the following statement to your `variables.tf` to use the `vpc` module:
 
 ```hcl
 module "core_vpc" {
-  source = "git::https://github.com/moritzheiber/terraform-aws-core-modules.git//vpc"
+  source = "git::https://github.com/AndroidNextdoor/aws-core-modules-tf.git//vpc"
 
   tags = {
     Resource    = "my_team_name"

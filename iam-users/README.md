@@ -3,7 +3,7 @@
 
 A module to configure the "users" account modeled after a common security principle of separating users from resource accounts through a MFA-enabled role-assumption bridge:
 
-![AWS IAM setup illustration](https://raw.githubusercontent.com/moritzheiber/terraform-aws-core-modules/main/files/aws_iam_setup.png)
+![AWS IAM setup illustration](https://raw.githubusercontent.com/AndroidNextdoor/aws-core-modules-tf/main/files/aws_iam_setup.png)
 
 These strict separation of privileges follow [an article I wrote a while ago](https://www.thoughtworks.com/insights/blog/using-aws-security-first-class-citizen).
 You can also create IAM users and IAM groups with this module and assign the users to specific groups. The module will create two default groups, one for admins and users, which you can disable by setting the `admin_group_name` and `user_group_name` to an empty string.
@@ -21,7 +21,7 @@ variable "iam_users" {
 }
 
 module "iam_users" {
-  source            = "git::https://github.com/moritzheiber/terraform-aws-core-modules.git//iam-users"
+  source            = "git::https://github.com/AndroidNextdoor/aws-core-modules-tf.git//iam-users"
 
   iam_users = var.iam_users
 }

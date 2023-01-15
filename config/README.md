@@ -7,7 +7,7 @@ As an example, if you'd wish to enable `AUTOSCALING_CAPACITY_REBALANCING` and di
 
 ```hcl
 module "aws_config" {
-    source = "git::https://github.com/moritzheiber/terraform-aws-core-modules//config"
+    source = "git::https://github.com/AndroidNextdoor/aws-core-modules-tf//config"
 
     enable_simple_rules = ["AUTOSCALING_CAPACITY_REBALANCING"]
     disable_simple_rules = ["INSTANCE_IN_VPC"]
@@ -18,7 +18,7 @@ If you wanted to change parameters on the `CLOUDWATCH_ALARM_ACTION_CHECK` comple
 
 ```hcl
 module "aws_config" {
-  source = "git::https://github.com/moritzheiber/terraform-aws-core-modules//config"
+  source = "git::https://github.com/AndroidNextdoor/aws-core-modules-tf//config"
 
   complex_config_rules = {
     CLOUDWATCH_ALARM_ACTION_CHECK = {

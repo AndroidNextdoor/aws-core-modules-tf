@@ -21,7 +21,7 @@ As an example, if you'd wish to enable `AUTOSCALING_CAPACITY_REBALANCING` and di
 
 ```hcl
 module "aws_config" {
-    source = "git::https://github.com/moritzheiber/terraform-aws-core-modules//config"
+    source = "git::https://github.com/AndroidNextdoor/aws-core-modules-tf//config"
 
     enable_simple_rules = ["AUTOSCALING_CAPACITY_REBALANCING"]
     disable_simple_rules = ["INSTANCE_IN_VPC"]
@@ -32,7 +32,7 @@ If you wanted to change parameters on the `CLOUDWATCH_ALARM_ACTION_CHECK` comple
 
 ```hcl
 module "aws_config" {
-  source = "git::https://github.com/moritzheiber/terraform-aws-core-modules//config"
+  source = "git::https://github.com/AndroidNextdoor/aws-core-modules-tf//config"
 
   complex_config_rules = {
     CLOUDWATCH_ALARM_ACTION_CHECK = {
@@ -104,7 +104,7 @@ You can disable any of these complex rules by simply unsetting the corresponding
 
 A module to configure the "users" account modeled after a common security principle of separating users from resource accounts through a MFA-enabled role-assumption bridge:
 
-![AWS IAM setup illustration](https://raw.githubusercontent.com/moritzheiber/terraform-aws-core-modules/main/files/aws_iam_setup.png)
+![AWS IAM setup illustration](https://raw.githubusercontent.com/AndroidNextdoor/aws-core-modules-tf/main/files/aws_iam_setup.png)
 
 These strict separation of privileges follow [an article I wrote a while ago](https://www.thoughtworks.com/insights/blog/using-aws-security-first-class-citizen).
 You can also create IAM users and IAM groups with this module and assign the users to specific groups. The module will create two default groups, one for admins and users, which you can disable by setting the `admin_group_name` and `user_group_name` to an empty string.
@@ -122,7 +122,7 @@ variable "iam_users" {
 }
 
 module "iam_users" {
-  source            = "git::https://github.com/moritzheiber/terraform-aws-core-modules.git//iam-users"
+  source            = "git::https://github.com/AndroidNextdoor/aws-core-modules-tf.git//iam-users"
 
   iam_users = var.iam_users
 }
@@ -165,12 +165,12 @@ This will run the module and create all the necessary permissions along with a u
 ## iam-resources
 
 A module to configure the "resources" account modelled after the common security principle of separating users from resource accounts through a MFA-enabled role-assumption bridge.
-Please see the [iam-users](https://github.com/moritzheiber/terraform-aws-core-modules/tree/main/iam-users) module for further explanation. It is generally assumed that this module isn't deployed on its own.
+Please see the [iam-users](https://github.com/AndroidNextdoor/aws-core-modules-tf/tree/main/iam-users) module for further explanation. It is generally assumed that this module isn't deployed on its own.
 
 ### Usage example
 ```hcl
 module "iam_resources" {
-  source            = "git::https://github.com/moritzheiber/terraform-aws-core-modules.git//iam-resources"
+  source            = "git::https://github.com/AndroidNextdoor/aws-core-modules-tf.git//iam-resources"
 ```
 
 ## Requirements
@@ -205,7 +205,7 @@ module "iam_resources" {
 
 This module builds a VPC with the default CIDR range of `10.0.0.0/16`, three subnets in a "public" configuration (attached to and routed through an AWS Internet Gateway) and three subnets in a "private" configuration (attached to and routed through three separate AWS NAT Gateways):
 
-![AWS VPC illustration](https://raw.githubusercontent.com/moritzheiber/terraform-aws-core-modules/main/files/aws_vpc.png)
+![AWS VPC illustration](https://raw.githubusercontent.com/AndroidNextdoor/aws-core-modules-tf/main/files/aws_vpc.png)
 
 ### Usage example
 
@@ -213,7 +213,7 @@ Add the following statement to your `variables.tf` to use the `vpc` module:
 
 ```hcl
 module "core_vpc" {
-  source = "git::https://github.com/moritzheiber/terraform-aws-core-modules.git//vpc"
+  source = "git::https://github.com/AndroidNextdoor/aws-core-modules-tf.git//vpc"
 
   tags = {
     Resource    = "my_team_name"

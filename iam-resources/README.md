@@ -2,12 +2,12 @@
 ## iam-resources
 
 A module to configure the "resources" account modelled after the common security principle of separating users from resource accounts through a MFA-enabled role-assumption bridge.
-Please see the [iam-users](https://github.com/moritzheiber/terraform-aws-core-modules/tree/main/iam-users) module for further explanation. It is generally assumed that this module isn't deployed on its own.
+Please see the [iam-users](https://github.com/AndroidNextdoor/aws-core-modules-tf/tree/main/iam-users) module for further explanation. It is generally assumed that this module isn't deployed on its own.
 
 ### Usage example
 ```hcl
 module "iam_resources" {
-  source            = "git::https://github.com/moritzheiber/terraform-aws-core-modules.git//iam-resources"
+  source            = "git::https://github.com/AndroidNextdoor/aws-core-modules-tf.git//iam-resources"
 ```
 
 ## Requirements
