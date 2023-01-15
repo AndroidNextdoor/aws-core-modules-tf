@@ -60,12 +60,6 @@ variable "user_group_name" {
   default     = "users"
 }
 
-variable "service_user_group_name" {
-  type        = string
-  description = "The name of the initial group created for users"
-  default     = "service_users"
-}
-
 variable "additional_admin_groups" {
   type        = list(string)
   description = "A list of additional groups to create associated with administrative privileges"
@@ -75,12 +69,6 @@ variable "additional_admin_groups" {
 variable "additional_user_groups" {
   type        = list(string)
   description = "A list of additional groups to create associated with regular users"
-  default     = []
-}
-
-variable "additional_service_user_groups" {
-  type        = list(string)
-  description = "A list of additional groups to create associated with service users"
   default     = []
 }
 

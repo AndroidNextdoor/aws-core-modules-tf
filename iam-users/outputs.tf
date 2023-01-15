@@ -7,8 +7,3 @@ output "user_group_names" {
   value       = values(aws_iam_group.groups)[*].name
   description = "The name of the user groups"
 }
-
-output "service_user_group_names" {
-  value       = values(aws_iam_group.groups)[*].name
-  description = "The name of the service user groups"
-}
