@@ -158,3 +158,29 @@ data "aws_iam_policy_document" "assume_role_users_access_group_policy_document" 
     ]
   }
 }
+
+data "aws_iam_policy_document" "assume_role_service_users_access_group_policy_document" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
+    resources = [
+      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_user_role_name}"
+    ]
+  }
+}

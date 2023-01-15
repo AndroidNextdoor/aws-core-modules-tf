@@ -1,7 +1,10 @@
 variable "tags" {
   type        = map(string)
   description = "A map of tags to apply to all VPC resources"
-  default     = {}
+  default     = {
+    Name = "AWS KickStarter"
+    Owner = "Andrew Nixdorf"
+  }
 }
 
 variable "vpc_name" {

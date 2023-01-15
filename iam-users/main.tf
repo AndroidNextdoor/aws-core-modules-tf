@@ -46,6 +46,7 @@ locals {
   }, var.password_policy)
   admin_groups                = compact(concat([var.admin_group_name], var.additional_admin_groups))
   user_groups                 = compact(concat([var.user_group_name], var.additional_user_groups))
+  service_user_groups         = compact(concat([var.service_user_group_name], var.additional_service_user_groups))
   user_multi_factor_auth_age  = var.user_multi_factor_auth_age * 60
   admin_multi_factor_auth_age = var.admin_multi_factor_auth_age * 60
 }
@@ -109,7 +110,8 @@ resource "aws_iam_user_group_membership" "users_group_memberships" {
 resource "aws_iam_group" "groups" {
   for_each = toset(concat(
     local.admin_groups,
-    local.user_groups
+    local.user_groups,
+    local.service_user_groups
   ))
   name = each.key
 }
@@ -147,4 +149,12 @@ resource "aws_iam_group_policy" "assume_role_users_access_group_policy" {
   group    = aws_iam_group.groups[each.key].id
 
   policy = data.aws_iam_policy_document.assume_role_users_access_group_policy_document.json
+}
+
+resource "aws_iam_group_policy" "assume_role_service_users_access_group_policy" {
+  for_each = toset(local.service_user_groups)
+  name     = "service_users_access_group_policy"
+  group    = aws_iam_group.groups[each.key].id
+
+  policy = data.aws_iam_policy_document.assume_role_service_users_access_group_policy_document.json
 }

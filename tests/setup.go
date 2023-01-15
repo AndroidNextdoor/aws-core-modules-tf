@@ -1,3 +1,3 @@
 package test
 
-const allowedRegion string = "eu-central-1"
+const allowedRegion string = "us-west-2"
