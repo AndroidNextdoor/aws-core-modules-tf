@@ -1,13 +1,13 @@
 variable "bucket_prefix" {
   type        = string
   description = "The prefix for the S3 bucket AWS Config Recorder writes to"
-  default     = "aws-config"
+  default     = "aws-config-tf"
 }
 
 variable "bucket_key_prefix" {
   type        = string
   description = "The prefix of the keys AWS Config writes to"
-  default     = "aws_config"
+  default     = "aws_config_tf"
 }
 
 variable "config_recorder_name" {
