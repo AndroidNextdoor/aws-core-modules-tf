@@ -349,7 +349,6 @@ data "aws_iam_policy_document" "limited_policy" {
       "dynamodb:List*",
       "dynamodb:PutItem",
       "dynamodb:Query",
-      "iam:CreateVirtualMFADevice",
     ]
 
     effect = "Allow"
@@ -421,7 +420,7 @@ data "aws_iam_policy_document" "aws_mfa_self_service_policy" {
     effect = "Allow"
 
     resources = [
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/$${aws:username}",
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/*",
     ]
 
     actions = [
