@@ -9,11 +9,11 @@ output "resource_admin_role_arn" {
 }
 
 output "resource_user_role_name" {
-  value       = aws_iam_role.user_access_role.name
+  value       = aws_iam_role.developer_access_role.name
   description = "The name of the role users are able to assume to attain user privileges"
 }
 
 output "resource_user_role_arn" {
-  value       = aws_iam_role.user_access_role.arn
+  value       = aws_iam_role.developer_access_role.arn
   description = "The ARN of the role users are able to assume to attain user privileges"
 }

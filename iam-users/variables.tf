@@ -39,25 +39,31 @@ variable "resources_account_id" {
 variable "resource_admin_role_name" {
   type        = string
   description = "The name of the administrator role one is supposed to assume in the resource account"
-  default     = "resource-admin"
+  default     = "DevOps-Admin"
 }
 
 variable "resource_user_role_name" {
   type        = string
   description = "The name of the user role one is supposed to assume in the resource account"
-  default     = "resource-user"
+  default     = "Developer"
 }
 
 variable "admin_group_name" {
   type        = string
   description = "The name of the initial group created for administrators"
-  default     = "admins"
+  default     = "DevOps"
 }
 
 variable "user_group_name" {
   type        = string
   description = "The name of the initial group created for users"
-  default     = "users"
+  default     = "Developers"
+}
+
+variable "limited_group_name" {
+  type        = string
+  description = "The name of the initial group created for users"
+  default     = "Limited"
 }
 
 variable "additional_admin_groups" {
@@ -69,6 +75,12 @@ variable "additional_admin_groups" {
 variable "additional_user_groups" {
   type        = list(string)
   description = "A list of additional groups to create associated with regular users"
+  default     = []
+}
+
+variable "additional_limited_groups" {
+  type        = list(string)
+  description = "A list of additional groups to create associated with limited users"
   default     = []
 }
 

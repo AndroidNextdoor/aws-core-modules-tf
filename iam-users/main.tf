@@ -46,6 +46,7 @@ locals {
   }, var.password_policy)
   admin_groups                = compact(concat([var.admin_group_name], var.additional_admin_groups))
   user_groups                 = compact(concat([var.user_group_name], var.additional_user_groups))
+  limited_groups              = compact(concat([var.limited_group_name], var.additional_limited_groups))
   user_multi_factor_auth_age  = var.user_multi_factor_auth_age * 60
   admin_multi_factor_auth_age = var.admin_multi_factor_auth_age * 60
 }
