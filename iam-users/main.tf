@@ -85,21 +85,21 @@ resource "aws_iam_policy" "aws_mfa_self_service" {
 }
 
 resource "aws_iam_policy" "devops_policy" {
-  name        = "devops policy"
+  name        = "devops_policy"
   description = "Policy for DevOps Users"
 
   policy = data.aws_iam_policy_document.devops_policy.json
 }
 
 resource "aws_iam_policy" "developer_policy" {
-  name        = "developer policy"
+  name        = "developer_policy"
   description = "Policy for Developers"
 
   policy = data.aws_iam_policy_document.developer_policy.json
 }
 
 resource "aws_iam_policy" "limited_policy" {
-  name        = "limited policy"
+  name        = "limited_policy"
   description = "Policy for Limited Users"
 
   policy = data.aws_iam_policy_document.limited_policy.json
