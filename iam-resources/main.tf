@@ -52,7 +52,7 @@ resource "aws_iam_role" "limited_access_role" {
 
 resource "aws_iam_policy" "developer_access_policy" {
   name        = "developer_access_policy"
-  description = "User access for roles"
+  description = "Developer access for roles"
 
   policy = data.aws_iam_policy_document.developer_access_policy_document.json
 }

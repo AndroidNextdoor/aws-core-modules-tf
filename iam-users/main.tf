@@ -110,7 +110,8 @@ resource "aws_iam_user_group_membership" "users_group_memberships" {
 resource "aws_iam_group" "groups" {
   for_each = toset(concat(
     local.admin_groups,
-    local.user_groups
+    local.user_groups,
+    local.limited_groups,
   ))
   name = each.key
 }

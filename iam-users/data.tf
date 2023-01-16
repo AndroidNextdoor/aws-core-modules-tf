@@ -38,9 +38,7 @@ data "aws_iam_policy_document" "aws_list_iam_users_policy" {
 
     actions = [
       "iam:GetAccountSummary",
-      "iam:ListAccountAliases",
-      "iam:ListGroupsForUser",
-      "iam:ListUsers",
+      "iam:List*",
     ]
 
     # We need to use * here since the API calls for these don't accept resources
