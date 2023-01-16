@@ -50,6 +50,13 @@ resource "aws_iam_role" "limited_access_role" {
   assume_role_policy = data.aws_iam_policy_document.limited_access_role_policy.json
 }
 
+resource "aws_iam_policy" "admin_access_policy" {
+  name        = "admin_access_policy"
+  description = "DevOps Admin access for roles"
+
+  policy = data.aws_iam_policy_document.admin_access_policy_document.json
+}
+
 resource "aws_iam_policy" "developer_access_policy" {
   name        = "developer_access_policy"
   description = "Developer access for roles"

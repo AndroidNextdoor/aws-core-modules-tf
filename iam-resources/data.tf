@@ -413,3 +413,20 @@ data "aws_iam_policy_document" "developer_access_policy_document" {
     ]
   }
 }
+
+data "aws_iam_policy_document" "admin_access_policy_document" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "iam:Delete*",
+    ]
+
+    not_resources = [
+      aws_iam_role.developer_access_role.arn,
+      aws_iam_role.admin_access_role.arn,
+      aws_iam_role.limited_access_role.arn,
+    ]
+  }
+}
+
