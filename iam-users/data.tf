@@ -241,7 +241,8 @@ data "aws_iam_policy_document" "developer_policy" {
       "s3:ListBucketVersions",
       "s3:GetObjectTagging",
       "s3:ListBucket",
-      "s3:GetBucketVersioning"
+      "s3:GetBucketVersioning",
+      "iam:CreateVirtualMFADevice"
     ]
 
     effect = "Allow"
@@ -348,6 +349,7 @@ data "aws_iam_policy_document" "limited_policy" {
       "dynamodb:List*",
       "dynamodb:PutItem",
       "dynamodb:Query",
+      "iam:CreateVirtualMFADevice",
     ]
 
     effect = "Allow"
