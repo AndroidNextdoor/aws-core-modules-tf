@@ -420,6 +420,8 @@ data "aws_iam_policy_document" "admin_access_policy_document" {
 
     actions = [
       "iam:Delete*",
+      "iam:Update*",
+      "iam:Remove*",
     ]
 
     not_resources = [
