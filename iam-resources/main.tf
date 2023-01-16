@@ -84,9 +84,9 @@ resource "aws_iam_policy_attachment" "developer_access_policy_attachment" {
 }
 
 resource "aws_iam_policy_attachment" "limited_access_policy_attachment" {
-  name       = "developer_access_policy_attachment"
-  roles      = [aws_iam_role.developer_access_role.name]
-  policy_arn = aws_iam_policy.developer_access_policy.arn
+  name       = "limited_access_policy_attachment"
+  roles      = [aws_iam_role.limited_access_role.name]
+  policy_arn = aws_iam_policy.limited_access_policy.arn
 }
 
 resource "aws_iam_policy_attachment" "user_access_iam_read_only_policy_attachment" {
