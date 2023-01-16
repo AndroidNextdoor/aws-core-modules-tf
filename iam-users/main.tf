@@ -146,7 +146,7 @@ resource "aws_iam_policy_attachment" "devops_policy" {
 
 resource "aws_iam_policy_attachment" "developer_policy" {
   name       = "developer_policy"
-  groups     = ["Developer"]
+  groups     = ["Developers"]
   policy_arn = aws_iam_policy.developer_policy.arn
 }
 
