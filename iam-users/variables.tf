@@ -7,7 +7,7 @@ variable "iam_account_alias" {
 variable "admin_multi_factor_auth_age" {
   type        = number
   description = "The amount of time (in minutes) for a admin session to be valid"
-  default     = 60 # 1 hour
+  default     = 120 # 2 hours
 }
 
 variable "user_multi_factor_auth_age" {
@@ -39,7 +39,7 @@ variable "resources_account_id" {
 variable "resource_admin_role_name" {
   type        = string
   description = "The name of the administrator role one is supposed to assume in the resource account"
-  default     = "DevOps-Admin"
+  default     = "DevOps"
 }
 
 variable "resource_user_role_name" {
