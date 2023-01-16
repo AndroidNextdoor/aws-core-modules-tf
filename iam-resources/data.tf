@@ -91,7 +91,10 @@ data "aws_iam_policy_document" "limited_access_role_policy" {
   }
 }
 
-# This denies the passing of the admin or user
+# This denies the passing of the Admin or Developer
+# The Limited Role needs PassRole permissions to run CodeBuild and CodePipeline Functionality
+# The limited role means that those users should have console access denied. Not limited in functionality or ability.
+# In-fact, the limited-role is quite powerful and should only be used in a CI/CD pipeline.
 data "aws_iam_policy_document" "user_access_policy_document" {
   statement {
     effect = "Allow"
@@ -103,7 +106,6 @@ data "aws_iam_policy_document" "user_access_policy_document" {
     not_resources = [
       aws_iam_role.developer_access_role.arn,
       aws_iam_role.admin_access_role.arn,
-      aws_iam_role.limited_access_role.arn,
     ]
   }
 }

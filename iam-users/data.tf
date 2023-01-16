@@ -9,7 +9,6 @@ data "aws_iam_policy_document" "aws_access_key_self_service_policy" {
       "iam:DeleteAccessKey",
       "iam:ListAccessKeys",
       "iam:UpdateAccessKey",
-      "iam:ChangePassword",
     ]
 
     effect = "Allow"
@@ -316,22 +315,22 @@ data "aws_iam_policy_document" "limited_policy" {
       "sns:Publish",
       "sns:SetTopicAttributes",
       "sns:Subscribe",
-      "ecr:GetAuthorizationToken",
-      "ecr:BatchCheckLayerAvailability",
-      "ecr:GetDownloadUrlForLayer",
-      "ecr:GetRepositoryPolicy",
-      "ecr:DescribeRepositories",
-      "ecr:ListImages",
-      "ecr:DescribeImages",
-      "ecr:BatchGetImage",
-      "ecr:GetLifecyclePolicy",
-      "ecr:GetLifecyclePolicyPreview",
-      "ecr:ListTagsForResource",
-      "ecr:DescribeImageScanFindings",
-      "ecr:PutImage",
-      "ecr:InitiateLayerUpload",
-      "ecr:UploadLayerPart",
-      "ecr:CompleteLayerUpload",
+#      "ecr:GetAuthorizationToken",
+#      "ecr:BatchCheckLayerAvailability",
+#      "ecr:GetDownloadUrlForLayer",
+#      "ecr:GetRepositoryPolicy",
+#      "ecr:DescribeRepositories",
+#      "ecr:ListImages",
+#      "ecr:DescribeImages",
+#      "ecr:BatchGetImage",
+#      "ecr:GetLifecyclePolicy",
+#      "ecr:GetLifecyclePolicyPreview",
+#      "ecr:ListTagsForResource",
+#      "ecr:DescribeImageScanFindings",
+#      "ecr:PutImage",
+#      "ecr:InitiateLayerUpload",
+#      "ecr:UploadLayerPart",
+#      "ecr:CompleteLayerUpload",
       "s3:PutObject",
       "s3:GetObject",
       "s3:GetBucketTagging",
@@ -404,16 +403,17 @@ data "aws_iam_policy_document" "aws_mfa_self_service_policy" {
   statement {
     effect = "Allow"
 
-    resources = [
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/$${aws:username}",
-    ]
-
     actions = [
       "iam:DeactivateMFADevice",
       "iam:EnableMFADevice",
       "iam:ResyncMFADevice",
       "iam:ListVirtualMFADevices",
       "iam:ListMFADevices",
+      "iam:ChangePassword",
+    ]
+
+    resources = [
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/$${aws:username}",
     ]
   }
 
