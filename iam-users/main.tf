@@ -105,6 +105,13 @@ resource "aws_iam_policy" "limited_policy" {
   policy = data.aws_iam_policy_document.limited_policy.json
 }
 
+resource "aws_iam_policy" "general_deny_iam_policy" {
+  name        = "iam_deny_policy"
+  description = "Policy to limit IAM Permissions for all Groups"
+
+  policy = data.aws_iam_policy_document.general_deny_iam_policy_document.json
+}
+
 resource "aws_iam_account_alias" "iam_account_alias" {
   count         = var.iam_account_alias == null ? 0 : 1
   account_alias = var.iam_account_alias
@@ -165,7 +172,7 @@ resource "aws_iam_policy_attachment" "users_mfa_self_service" {
 resource "aws_iam_policy_attachment" "general_deny_iam_policy" {
   name       = "general_deny_iam_policy"
   groups     = values(aws_iam_group.groups)[*].name
-  policy_arn = aws_iam_policy.aws_mfa_self_service.arn
+  policy_arn = aws_iam_policy.general_deny_iam_policy.arn
 }
 
 resource "aws_iam_policy_attachment" "users_access_key_self_service" {
