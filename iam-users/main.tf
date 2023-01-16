@@ -111,7 +111,7 @@ resource "aws_iam_group" "groups" {
   for_each = toset(concat(
     local.admin_groups,
     local.user_groups,
-    local.limited_groups,
+    local.limited_groups
   ))
   name = each.key
 }
@@ -149,4 +149,12 @@ resource "aws_iam_group_policy" "assume_role_users_access_group_policy" {
   group    = aws_iam_group.groups[each.key].id
 
   policy = data.aws_iam_policy_document.assume_role_users_access_group_policy_document.json
+}
+
+resource "aws_iam_group_policy" "assume_role_limited_access_group_policy" {
+  for_each = toset(local.limited_groups)
+  name     = "limited_access_group_policy"
+  group    = aws_iam_group.groups[each.key].id
+
+  policy = data.aws_iam_policy_document.assume_role_limited_access_group_policy_document.json
 }
