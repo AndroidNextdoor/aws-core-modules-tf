@@ -140,19 +140,19 @@ resource "aws_iam_group" "groups" {
 # Group policy assignments
 resource "aws_iam_policy_attachment" "devops_policy" {
   name       = "devops_policy"
-  groups     = "DevOps"
+  groups     = ["DevOps"]
   policy_arn = aws_iam_policy.devops_policy.arn
 }
 
 resource "aws_iam_policy_attachment" "developer_policy" {
   name       = "developer_policy"
-  groups     = "Developer"
+  groups     = ["Developer"]
   policy_arn = aws_iam_policy.developer_policy.arn
 }
 
 resource "aws_iam_policy_attachment" "limited_policy" {
   name       = "limited_policy"
-  groups     = "Limited"
+  groups     = ["Limited"]
   policy_arn = aws_iam_policy.limited_policy.arn
 }
 
