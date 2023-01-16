@@ -9,6 +9,7 @@ data "aws_iam_policy_document" "aws_access_key_self_service_policy" {
       "iam:DeleteAccessKey",
       "iam:ListAccessKeys",
       "iam:UpdateAccessKey",
+      "iam:ChangePassword",
     ]
 
     effect = "Allow"
