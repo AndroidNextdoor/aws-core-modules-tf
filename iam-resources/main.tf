@@ -54,21 +54,21 @@ resource "aws_iam_policy" "admin_access_policy" {
   name        = "admin_access_policy"
   description = "DevOps Admin access for roles"
 
-  policy = data.aws_iam_policy_document.admin_access_policy_document.json
+  policy = data.aws_iam_policy_document.user_access_policy_document.json
 }
 
 resource "aws_iam_policy" "developer_access_policy" {
   name        = "developer_access_policy"
   description = "Developer access for roles"
 
-  policy = data.aws_iam_policy_document.developer_access_policy_document.json
+  policy = data.aws_iam_policy_document.user_access_policy_document.json
 }
 
 resource "aws_iam_policy" "limited_access_policy" {
   name        = "limited_access_policy"
   description = "Limited access for roles"
 
-  policy = data.aws_iam_policy_document.general_deny_role_policy.json
+  policy = data.aws_iam_policy_document.user_access_policy_document.json
 }
 
 # Policy attachments for roles

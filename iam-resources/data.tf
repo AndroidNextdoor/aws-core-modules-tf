@@ -61,6 +61,36 @@ data "aws_iam_policy_document" "developer_access_role_policy" {
   }
 }
 
+data "aws_iam_policy_document" "limited_access_role_policy" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
+    principals {
+      type = "AWS"
+
+      identifiers = [
+        "arn:aws:iam::${local.users_account_id}:root",
+      ]
+    }
+  }
+}
+
 # This denies the passing of the admin or user
 data "aws_iam_policy_document" "user_access_policy_document" {
   statement {
