@@ -252,6 +252,12 @@ data "aws_iam_policy_document" "devops_full_policy" {
 
     effect = "Allow"
 
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
+
     resources = [
       "*",
     ]
@@ -626,12 +632,6 @@ data "aws_iam_policy_document" "developer_cli_policy" {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
       values   = ["true"]
-    }
-
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
     }
 
     effect = "Allow"

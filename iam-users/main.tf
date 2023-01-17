@@ -45,6 +45,7 @@ locals {
     allow_users_to_change_password = "true"
   }, var.password_policy)
   owner_groups                = compact(concat([var.owner_group_name], var.additional_admin_groups))
+  devops_admin_groups         = compact(concat([var.devops_admin_group_name], var.additional_admin_groups))
   devops_groups               = compact(concat([var.devops_group_name], var.additional_admin_groups))
   developer_groups            = compact(concat([var.developer_group_name], var.additional_user_groups))
   power_user_groups           = compact(concat([var.power_user_group_name], var.additional_user_groups))
@@ -163,6 +164,7 @@ resource "aws_iam_group" "groups" {
   for_each = toset(concat(
     local.owner_groups,
     local.devops_groups,
+    local.devops_admin_groups,
     local.developer_groups,
     local.power_user_groups,
     local.pipeline_groups,
