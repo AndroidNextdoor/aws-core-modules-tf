@@ -21,6 +21,8 @@ data "aws_iam_policy_document" "devops_policy" {
 
 data "aws_iam_policy_document" "owner_billing_policy" {
   statement {
+    effect = "Allow"
+
     actions = [
       "aws-portal:ModifyBilling",
       "aws-portal:ViewBilling",
@@ -33,8 +35,6 @@ data "aws_iam_policy_document" "owner_billing_policy" {
       "purchase-orders:ModifyPurchaseOrders",
     ]
 
-    effect = "Allow"
-
     condition {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
@@ -46,15 +46,13 @@ data "aws_iam_policy_document" "owner_billing_policy" {
       variable = "aws:MultiFactorAuthAge"
       values   = [local.user_multi_factor_auth_age]
     }
-
-    resources = [
-      "*"
-    ]
   }
 }
 
 data "aws_iam_policy_document" "readonly_billing_policy" {
   statement {
+    effect = "Allow"
+
     actions = [
       "aws-portal:ViewBilling",
       "aws-portal:ViewAccount",
@@ -63,8 +61,6 @@ data "aws_iam_policy_document" "readonly_billing_policy" {
       "purchase-orders:ViewPurchaseOrders",
     ]
 
-    effect = "Allow"
-
     condition {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
@@ -76,10 +72,6 @@ data "aws_iam_policy_document" "readonly_billing_policy" {
       variable = "aws:MultiFactorAuthAge"
       values   = [local.user_multi_factor_auth_age]
     }
-
-    resources = [
-      "*"
-    ]
   }
 }
 
