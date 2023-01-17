@@ -42,13 +42,13 @@ resource "aws_iam_role" "devops_access_role" {
 resource "aws_iam_role" "devops_full_access_role" {
   name = var.devops_full_access_role_name
 
-  assume_role_policy = data.aws_iam_policy_document.mfa_required_role_policy.json
+  assume_role_policy = data.aws_iam_policy_document.no_mfa_required_role_policy.json
 }
 
 resource "aws_iam_role" "developer_access_role" {
   name = var.developer_access_role_name
 
-  assume_role_policy = data.aws_iam_policy_document.full_mfa_required_role_policy.json
+  assume_role_policy = data.aws_iam_policy_document.mfa_required_role_policy.json
 }
 
 resource "aws_iam_role" "pipeline_access_role" {
@@ -66,13 +66,13 @@ resource "aws_iam_role" "power_user_access_role" {
 resource "aws_iam_role" "owner_access_role" {
   name = var.owner_access_role_name
 
-  assume_role_policy = data.aws_iam_policy_document.full_mfa_required_role_policy.json
+  assume_role_policy = data.aws_iam_policy_document.mfa_required_role_policy.json
 }
 
 resource "aws_iam_role" "billing_access_role" {
   name = var.billing_access_role_name
 
-  assume_role_policy = data.aws_iam_policy_document.full_mfa_required_role_policy.json
+  assume_role_policy = data.aws_iam_policy_document.mfa_required_role_policy.json
 }
 
 

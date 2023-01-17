@@ -1,7 +1,7 @@
 data "aws_caller_identity" "current" {}
 
 # AssumeRole policies to enforce MFA when assuming these from either the same or a different account
-data "aws_iam_policy_document" "full_mfa_required_role_policy" {
+data "aws_iam_policy_document" "mfa_required_role_policy" {
   statement {
     effect = "Allow"
 
@@ -19,30 +19,6 @@ data "aws_iam_policy_document" "full_mfa_required_role_policy" {
       test     = "NumericLessThan"
       variable = "aws:MultiFactorAuthAge"
       values   = [local.user_multi_factor_auth_age]
-    }
-
-    principals {
-      type = "AWS"
-
-      identifiers = [
-        "arn:aws:iam::${local.users_account_id}:root",
-      ]
-    }
-  }
-}
-
-data "aws_iam_policy_document" "mfa_required_role_policy" {
-  statement {
-    effect = "Allow"
-
-    actions = [
-      "sts:AssumeRole",
-    ]
-
-    condition {
-      test     = "Bool"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
     }
 
     principals {
