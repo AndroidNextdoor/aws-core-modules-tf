@@ -44,8 +44,9 @@ locals {
     max_password_age               = "90"
     allow_users_to_change_password = "true"
   }, var.password_policy)
-  admin_groups                = compact(concat([var.devops_group_name], var.additional_admin_groups))
-  user_groups                 = compact(concat([var.developer_group_name], var.additional_user_groups))
+  owner_groups                = compact(concat([var.owner_group_name], var.additional_admin_groups))
+  devops_groups               = compact(concat([var.devops_group_name], var.additional_admin_groups))
+  developer_groups            = compact(concat([var.developer_group_name], var.additional_user_groups))
   power_user_groups           = compact(concat([var.power_user_group_name], var.additional_user_groups))
   limited_groups              = compact(concat([var.limited_group_name], var.additional_limited_groups))
   billing_groups              = compact(concat([var.billing_group_name], var.additional_limited_groups))
@@ -160,8 +161,9 @@ resource "aws_iam_user_group_membership" "users_group_memberships" {
 # Groups
 resource "aws_iam_group" "groups" {
   for_each = toset(concat(
-    local.admin_groups,
-    local.user_groups,
+    local.owner_groups,
+    local.devops_groups,
+    local.developer_groups,
     local.power_user_groups,
     local.limited_groups
   ))
