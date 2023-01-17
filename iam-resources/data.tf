@@ -57,18 +57,6 @@ data "aws_iam_policy_document" "limited_access_role_policy" {
       "sts:AssumeRole",
     ]
 
-    condition {
-      test     = "Bool"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
-    }
-
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
-    }
-
     principals {
       type = "AWS"
 
@@ -184,6 +172,9 @@ data "aws_iam_policy_document" "user_access_policy_document" {
     not_resources = [
       aws_iam_role.developer_access_role.arn,
       aws_iam_role.admin_access_role.arn,
+      aws_iam_role.power_user_access_role.arn,
+      aws_iam_role.billing_access_role.arn,
+      aws_iam_role.owner_access_role.arn,
     ]
   }
 }
