@@ -66,6 +66,12 @@ variable "user_group_name" {
   default     = "Developers"
 }
 
+variable "power_user_group_name" {
+  type        = string
+  description = "The name of the initial group created for users"
+  default     = "PowerUsers"
+}
+
 variable "limited_group_name" {
   type        = string
   description = "The name of the initial group created for users"

@@ -46,6 +46,7 @@ locals {
   }, var.password_policy)
   admin_groups                = compact(concat([var.admin_group_name], var.additional_admin_groups))
   user_groups                 = compact(concat([var.user_group_name], var.additional_user_groups))
+  power_user_groups           = compact(concat([var.power_user_group_name], var.additional_user_groups))
   limited_groups              = compact(concat([var.limited_group_name], var.additional_limited_groups))
   user_multi_factor_auth_age  = var.user_multi_factor_auth_age * 60
   admin_multi_factor_auth_age = var.admin_multi_factor_auth_age * 60
@@ -146,6 +147,7 @@ resource "aws_iam_group" "groups" {
   for_each = toset(concat(
     local.admin_groups,
     local.user_groups,
+    local.power_user_groups,
     local.limited_groups
   ))
   name = each.key
@@ -166,7 +168,7 @@ resource "aws_iam_policy_attachment" "developer_policy" {
 
 resource "aws_iam_policy_attachment" "developer_cli_policy" {
   name       = "developer_cli_policy"
-  groups     = ["Developers"]
+  groups     = ["PowerUsers"]
   policy_arn = aws_iam_policy.developer_cli_policy.arn
 }
 

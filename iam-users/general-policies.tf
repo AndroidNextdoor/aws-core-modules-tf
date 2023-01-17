@@ -19,6 +19,70 @@ data "aws_iam_policy_document" "devops_policy" {
   }
 }
 
+data "aws_iam_policy_document" "owner_billing_policy" {
+  statement {
+    actions = [
+      "aws-portal:ModifyBilling",
+      "aws-portal:ViewBilling",
+      "aws-portal:ViewAccount",
+      "aws-portal:ModifyAccount",
+      "aws-portal:ViewPaymentMethods",
+      "aws-portal:ModifyPaymentMethods",
+      "aws-portal:ViewUsage",
+      "purchase-orders:ViewPurchaseOrders",
+      "purchase-orders:ModifyPurchaseOrders",
+    ]
+
+    effect = "Allow"
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
+    resources = [
+      "*",
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "readonly_billing_policy" {
+  statement {
+    actions = [
+      "aws-portal:ViewBilling",
+      "aws-portal:ViewAccount",
+      "aws-portal:ViewPaymentMethods",
+      "aws-portal:ViewUsage",
+      "purchase-orders:ViewPurchaseOrders",
+    ]
+
+    effect = "Allow"
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
+    resources = [
+      "*",
+    ]
+  }
+}
+
 ## UPDATE THESE FOR YOUR DEVELOPERS NEEDS
 data "aws_iam_policy_document" "developer_policy" {
   statement {
