@@ -79,6 +79,96 @@ data "aws_iam_policy_document" "limited_access_role_policy" {
   }
 }
 
+data "aws_iam_policy_document" "billing_access_role_policy" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
+    principals {
+      type = "AWS"
+
+      identifiers = [
+        "arn:aws:iam::${local.users_account_id}:root",
+      ]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "owner_access_role_policy" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
+    principals {
+      type = "AWS"
+
+      identifiers = [
+        "arn:aws:iam::${local.users_account_id}:root",
+      ]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "power_user_access_role_policy" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
+    principals {
+      type = "AWS"
+
+      identifiers = [
+        "arn:aws:iam::${local.users_account_id}:root",
+      ]
+    }
+  }
+}
+
 # This denies the passing of the Admin or Developer
 # The Limited Role needs PassRole permissions to run CodeBuild and CodePipeline Functionality
 # The limited role means that those users should have console access denied. Not limited in functionality or ability.

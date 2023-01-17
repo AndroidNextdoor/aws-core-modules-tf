@@ -36,6 +36,24 @@ variable "developer_access_role_name" {
 
 variable "limited_access_role_name" {
   type        = string
-  description = "Name of the limited role"
+  description = "Name of the pipeline role"
   default     = "Pipeline-Role"
+}
+
+variable "owner_access_role_name" {
+  type        = string
+  description = "Name of the owner role"
+  default     = "Owner-Role"
+}
+
+variable "billing_access_role_name" {
+  type        = string
+  description = "Name of the billing role"
+  default     = "Billing-Role"
+}
+
+variable "power_user_access_role_name" {
+  type        = string
+  description = "Name of the power user role"
+  default     = "Power-User-Role"
 }

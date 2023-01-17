@@ -50,6 +50,24 @@ resource "aws_iam_role" "limited_access_role" {
   assume_role_policy = data.aws_iam_policy_document.limited_access_role_policy.json
 }
 
+resource "aws_iam_role" "power_user_access_role" {
+  name = var.power_user_access_role_name
+
+  assume_role_policy = data.aws_iam_policy_document.power_user_access_role_policy.json
+}
+
+resource "aws_iam_role" "owner_access_role" {
+  name = var.owner_access_role_name
+
+  assume_role_policy = data.aws_iam_policy_document.owner_access_role_policy.json
+}
+
+resource "aws_iam_role" "billing_access_role" {
+  name = var.billing_access_role_name
+
+  assume_role_policy = data.aws_iam_policy_document.billing_access_role_policy.json
+}
+
 resource "aws_iam_policy" "admin_access_policy" {
   name        = "admin_access_policy"
   description = "DevOps Admin access for roles"
