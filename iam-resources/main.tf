@@ -75,11 +75,12 @@ resource "aws_iam_role" "billing_access_role" {
   assume_role_policy = data.aws_iam_policy_document.full_mfa_required_role_policy.json
 }
 
+
 resource "aws_iam_policy" "devops_access_policy" {
   name        = "devops_access_policy"
   description = "DevOps access for roles"
 
-  policy = data.aws_iam_policy_document.mfa_required_role_policy.json
+  policy = data.aws_iam_policy_document.admin_access_policy_document.json
 }
 
 resource "aws_iam_policy" "devops_full_access_policy" {

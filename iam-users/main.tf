@@ -203,8 +203,8 @@ resource "aws_iam_policy_attachment" "developer_cli_policy" {
 }
 
 resource "aws_iam_policy_attachment" "pipeline_policy" {
-  name       = "limited_policy"
-  groups     = ["Limited"]
+  name       = "pipeline_policy"
+  groups     = ["Pipeline"]
   policy_arn = aws_iam_policy.pipeline_policy.arn
 }
 
