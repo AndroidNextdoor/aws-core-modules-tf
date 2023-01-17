@@ -250,6 +250,14 @@ resource "aws_iam_group_policy" "assume_role_devops_access_group_policy" {
   policy = data.aws_iam_policy_document.assume_role_devops_access_group_policy_document.json
 }
 
+resource "aws_iam_group_policy" "assume_role_devops_full_access_group_policy" {
+  for_each = toset(local.devops_admin_groups)
+  name     = "devops_full_access_group_policy"
+  group    = aws_iam_group.groups[each.key].id
+
+  policy = data.aws_iam_policy_document.assume_role_devops_full_access_group_policy_document.json
+}
+
 resource "aws_iam_group_policy" "assume_role_power_user_access_group_policy" {
   for_each = toset(local.power_user_groups)
   name     = "power_user_access_group_policy"

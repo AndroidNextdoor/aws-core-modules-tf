@@ -103,6 +103,20 @@ data "aws_iam_policy_document" "aws_mfa_self_service_policy" {
 }
 
 # Group policies
+data "aws_iam_policy_document" "assume_role_devops_full_access_group_policy_document" {
+  statement {
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    effect = "Allow"
+
+    resources = [
+      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_devops_full_role_name}",
+    ]
+  }
+}
+
 data "aws_iam_policy_document" "assume_role_devops_access_group_policy_document" {
   statement {
     actions = [
@@ -251,12 +265,6 @@ data "aws_iam_policy_document" "devops_full_policy" {
     ]
 
     effect = "Allow"
-
-    condition {
-      test     = "Bool"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
-    }
 
     resources = [
       "*",
