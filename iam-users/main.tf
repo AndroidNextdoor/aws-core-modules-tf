@@ -178,11 +178,11 @@ resource "aws_iam_policy_attachment" "users_mfa_self_service" {
   policy_arn = aws_iam_policy.aws_mfa_self_service.arn
 }
 
-resource "aws_iam_policy_attachment" "general_deny_iam_policy" {
-  name       = "general_deny_iam_policy"
-  groups     = values(aws_iam_group.groups)[*].name
-  policy_arn = aws_iam_policy.general_deny_iam_policy.arn
-}
+#resource "aws_iam_policy_attachment" "general_deny_iam_policy" {
+#  name       = "general_deny_iam_policy"
+#  groups     = values(aws_iam_group.groups)[*].name
+#  policy_arn = aws_iam_policy.general_deny_iam_policy.arn
+#}
 
 resource "aws_iam_policy_attachment" "users_access_key_self_service" {
   name       = "users_access_key_self_service"
