@@ -42,7 +42,7 @@ resource "aws_iam_role" "devops_access_role" {
 resource "aws_iam_role" "devops_full_access_role" {
   name = var.devops_full_access_role_name
 
-  assume_role_policy = data.aws_iam_policy_document.devops_access_role_policy.json
+  assume_role_policy = data.aws_iam_policy_document.devops_full_access_role_policy.json
 }
 
 resource "aws_iam_role" "developer_access_role" {
@@ -86,7 +86,7 @@ resource "aws_iam_policy" "devops_full_access_policy" {
   name        = "devops_full_access_policy"
   description = "DevOps Admin access for roles"
 
-  policy = data.aws_iam_policy_document.admin_access_policy_document.json
+  policy = data.aws_iam_policy_document.devops_full_policy.json
 }
 
 resource "aws_iam_policy" "developer_access_policy" {

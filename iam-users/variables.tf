@@ -87,7 +87,7 @@ variable "owner_group_name" {
 variable "devops_group_name" {
   type        = string
   description = "The name of the initial group created for devops admins"
-  default     = "DevOps"
+  default     = "DevOps-Admins"
 }
 
 variable "developer_group_name" {

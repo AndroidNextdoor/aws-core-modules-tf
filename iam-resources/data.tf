@@ -25,6 +25,24 @@ data "aws_iam_policy_document" "devops_access_role_policy" {
   }
 }
 
+data "aws_iam_policy_document" "devops_full_access_role_policy" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    principals {
+      type = "AWS"
+
+      identifiers = [
+        "arn:aws:iam::${local.users_account_id}:root",
+      ]
+    }
+  }
+}
+
 data "aws_iam_policy_document" "developer_access_role_policy" {
   statement {
     effect = "Allow"

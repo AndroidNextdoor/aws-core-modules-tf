@@ -101,11 +101,18 @@ resource "aws_iam_policy" "readonly_billing_policy" {
   policy = data.aws_iam_policy_document.readonly_billing_policy.json
 }
 
-resource "aws_iam_policy" "devops_admin_policy" {
+resource "aws_iam_policy" "devops_full_policy" {
   name        = "devops_admin_policy"
   description = "Policy for DevOps Admin"
 
   policy = data.aws_iam_policy_document.devops_full_policy.json
+}
+
+resource "aws_iam_policy" "devops_policy" {
+  name        = "devops_policy"
+  description = "Policy for DevOps"
+
+  policy = data.aws_iam_policy_document.devops_policy.json
 }
 
 resource "aws_iam_policy" "developer_policy" {
@@ -165,6 +172,48 @@ resource "aws_iam_group" "groups" {
 }
 
 # Group policy assignments
+resource "aws_iam_policy_attachment" "owner_policy" {
+  name       = "owner_policy"
+  groups     = ["Owner"]
+  policy_arn = aws_iam_policy.owner_billing_policy.arn
+}
+
+resource "aws_iam_policy_attachment" "devops_policy" {
+  name       = "devops_policy"
+  groups     = ["DevOps"]
+  policy_arn = aws_iam_policy.devops_policy.arn
+}
+
+resource "aws_iam_policy_attachment" "devops_full_policy" {
+  name       = "devops_full_policy"
+  groups     = ["DevOps-Admins"]
+  policy_arn = aws_iam_policy.devops_full_policy.arn
+}
+
+resource "aws_iam_policy_attachment" "developer_policy" {
+  name       = "developer_policy"
+  groups     = ["Developers"]
+  policy_arn = aws_iam_policy.developer_policy.arn
+}
+
+resource "aws_iam_policy_attachment" "developer_cli_policy" {
+  name       = "developer_cli_policy"
+  groups     = ["PowerUsers"]
+  policy_arn = aws_iam_policy.developer_cli_policy.arn
+}
+
+resource "aws_iam_policy_attachment" "pipeline_policy" {
+  name       = "limited_policy"
+  groups     = ["Limited"]
+  policy_arn = aws_iam_policy.pipeline_policy.arn
+}
+
+resource "aws_iam_policy_attachment" "billing" {
+  name       = "billing_policy"
+  groups     = ["Billing"]
+  policy_arn = aws_iam_policy.readonly_billing_policy.arn
+}
+
 resource "aws_iam_policy_attachment" "users_mfa_self_service" {
   name       = "users_mfa_self_service"
   groups     = values(aws_iam_group.groups)[*].name
