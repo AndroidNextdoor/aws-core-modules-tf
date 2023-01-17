@@ -31,7 +31,7 @@ variable "admin_access_role_name" {
 variable "developer_access_role_name" {
   type        = string
   description = "Name of the user role"
-  default     = "Developer"
+  default     = "Developer-Role"
 }
 
 variable "limited_access_role_name" {

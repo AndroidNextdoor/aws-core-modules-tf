@@ -57,7 +57,7 @@ variable "resource_power_user_role_name" {
 variable "resource_developer_role_name" {
   type        = string
   description = "The name of the developer role one is supposed to assume in the resource account"
-  default     = "Developer"
+  default     = "Developer-Role"
 }
 
 variable "resource_limited_role_name" {
