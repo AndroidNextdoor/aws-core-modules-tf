@@ -86,7 +86,7 @@ resource "aws_iam_policy" "devops_full_access_policy" {
   name        = "devops_full_access_policy"
   description = "DevOps Admin access for roles"
 
-  policy = data.aws_iam_policy_document.devops_full_policy.json
+  policy = data.aws_iam_policy_document.admin_access_policy_document.json
 }
 
 resource "aws_iam_policy" "developer_access_policy" {
