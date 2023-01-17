@@ -228,3 +228,107 @@ data "aws_iam_policy_document" "assume_role_limited_access_group_policy_document
     ]
   }
 }
+
+data "aws_iam_policy_document" "assume_role_billing_access_group_policy_document" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["false"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
+    resources = [
+      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_limited_role_name}"
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "assume_role_owner_access_group_policy_document" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["false"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
+    resources = [
+      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_owner_role_name}"
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "assume_role_power_user_access_group_policy_document" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["false"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
+    resources = [
+      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_power_user_role_name}"
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "assume_role_billing_access_group_policy_document" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["false"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
+    resources = [
+      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_billing_role_name}"
+    ]
+  }
+}

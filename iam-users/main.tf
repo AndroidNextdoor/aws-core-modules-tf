@@ -171,42 +171,6 @@ resource "aws_iam_group" "groups" {
 }
 
 # Group policy assignments
-resource "aws_iam_policy_attachment" "owner_policy" {
-  name       = "owner_policy"
-  groups     = ["Owner"]
-  policy_arn = aws_iam_policy.owner_billing_policy.arn
-}
-
-resource "aws_iam_policy_attachment" "devops_policy" {
-  name       = "devops_policy"
-  groups     = ["DevOps"]
-  policy_arn = aws_iam_policy.devops_policy.arn
-}
-
-resource "aws_iam_policy_attachment" "developer_policy" {
-  name       = "developer_policy"
-  groups     = ["Developers"]
-  policy_arn = aws_iam_policy.developer_policy.arn
-}
-
-resource "aws_iam_policy_attachment" "developer_cli_policy" {
-  name       = "developer_cli_policy"
-  groups     = ["PowerUsers"]
-  policy_arn = aws_iam_policy.developer_cli_policy.arn
-}
-
-resource "aws_iam_policy_attachment" "limited_policy" {
-  name       = "limited_policy"
-  groups     = ["Limited"]
-  policy_arn = aws_iam_policy.limited_policy.arn
-}
-
-resource "aws_iam_policy_attachment" "billing" {
-  name       = "billing_policy"
-  groups     = ["Billing"]
-  policy_arn = aws_iam_policy.readonly_billing_policy.arn
-}
-
 resource "aws_iam_policy_attachment" "users_mfa_self_service" {
   name       = "users_mfa_self_service"
   groups     = values(aws_iam_group.groups)[*].name
@@ -231,16 +195,32 @@ resource "aws_iam_policy_attachment" "users_list_iam_users" {
   policy_arn = aws_iam_policy.aws_list_iam_users.arn
 }
 
+resource "aws_iam_group_policy" "assume_role_owner_access_group_policy" {
+  for_each = toset(local.owner_groups)
+  name     = "owner_access_group_policy"
+  group    = aws_iam_group.groups[each.key].id
+
+  policy = data.aws_iam_policy_document.assume_role_owner_access_group_policy_document.json
+}
+
 resource "aws_iam_group_policy" "assume_role_devops_access_group_policy" {
-  for_each = toset(local.admin_groups)
+  for_each = toset(local.devops_groups)
   name     = "devops_access_group_policy"
   group    = aws_iam_group.groups[each.key].id
 
   policy = data.aws_iam_policy_document.assume_role_devops_access_group_policy_document.json
 }
 
+resource "aws_iam_group_policy" "assume_role_power_user_access_group_policy" {
+  for_each = toset(local.power_user_groups)
+  name     = "power_user_access_group_policy"
+  group    = aws_iam_group.groups[each.key].id
+
+  policy = data.aws_iam_policy_document.assume_role_power_user_access_group_policy_document.json
+}
+
 resource "aws_iam_group_policy" "assume_role_developer_access_group_policy" {
-  for_each = toset(local.user_groups)
+  for_each = toset(local.developer_groups)
   name     = "developer_access_group_policy"
   group    = aws_iam_group.groups[each.key].id
 
@@ -253,4 +233,12 @@ resource "aws_iam_group_policy" "assume_role_limited_access_group_policy" {
   group    = aws_iam_group.groups[each.key].id
 
   policy = data.aws_iam_policy_document.assume_role_limited_access_group_policy_document.json
+}
+
+resource "aws_iam_group_policy" "assume_role_billing_access_group_policy" {
+  for_each = toset(local.billing_groups)
+  name     = "billing_access_group_policy"
+  group    = aws_iam_group.groups[each.key].id
+
+  policy = data.aws_iam_policy_document.assume_role_billing_access_group_policy_document.json
 }

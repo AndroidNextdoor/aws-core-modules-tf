@@ -48,6 +48,12 @@ variable "resource_owner_role_name" {
   default     = "Owner"
 }
 
+variable "resource_power_user_role_name" {
+  type        = string
+  description = "The name of the owner role one is supposed to assume in the resource account"
+  default     = "PowerUser"
+}
+
 variable "resource_developer_role_name" {
   type        = string
   description = "The name of the developer role one is supposed to assume in the resource account"
