@@ -18,13 +18,13 @@ output "resource_developer_role_arn" {
   description = "The ARN of the role users are able to assume to attain user privileges"
 }
 
-output "resource_limited_role_name" {
-  value       = aws_iam_role.limited_access_role.name
+output "resource_pipeline_role_name" {
+  value       = aws_iam_role.pipeline_access_role.name
   description = "The name of the role users are able to assume to attain user privileges"
 }
 
-output "resource_limited_role_arn" {
-  value       = aws_iam_role.limited_access_role.arn
+output "resource_pipeline_role_arn" {
+  value       = aws_iam_role.pipeline_access_role.arn
   description = "The ARN of the role users are able to assume to attain user privileges"
 }
 

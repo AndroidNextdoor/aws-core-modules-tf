@@ -51,10 +51,10 @@ resource "aws_iam_role" "developer_access_role" {
   assume_role_policy = data.aws_iam_policy_document.developer_access_role_policy.json
 }
 
-resource "aws_iam_role" "limited_access_role" {
-  name = var.limited_access_role_name
+resource "aws_iam_role" "pipeline_access_role" {
+  name = var.pipeline_access_role_name
 
-  assume_role_policy = data.aws_iam_policy_document.limited_access_role_policy.json
+  assume_role_policy = data.aws_iam_policy_document.pipeline_access_role_policy.json
 }
 
 resource "aws_iam_role" "power_user_access_role" {
@@ -79,14 +79,14 @@ resource "aws_iam_policy" "devops_access_policy" {
   name        = "devops_access_policy"
   description = "DevOps access for roles"
 
-  policy = data.aws_iam_policy_document.user_access_policy_document.json
+  policy = data.aws_iam_policy_document.admin_access_policy_document.json
 }
 
 resource "aws_iam_policy" "devops_full_access_policy" {
   name        = "devops_full_access_policy"
   description = "DevOps Admin access for roles"
 
-  policy = data.aws_iam_policy_document.user_access_policy_document.json
+  policy = data.aws_iam_policy_document.admin_access_policy_document.json
 }
 
 resource "aws_iam_policy" "developer_access_policy" {
@@ -96,11 +96,11 @@ resource "aws_iam_policy" "developer_access_policy" {
   policy = data.aws_iam_policy_document.user_access_policy_document.json
 }
 
-resource "aws_iam_policy" "limited_access_policy" {
-  name        = "limited_access_policy"
+resource "aws_iam_policy" "pipeline_access_policy" {
+  name        = "pipeline_access_policy"
   description = "Pipeline access for roles"
 
-  policy = data.aws_iam_policy_document.user_access_policy_document.json
+  policy = data.aws_iam_policy_document.admin_access_policy_document.json
 }
 
 resource "aws_iam_policy" "billing_access_policy" {
@@ -136,10 +136,10 @@ resource "aws_iam_policy_attachment" "developer_access_policy_attachment" {
   policy_arn = aws_iam_policy.developer_access_policy.arn
 }
 
-resource "aws_iam_policy_attachment" "limited_access_policy_attachment" {
-  name       = "limited_access_policy_attachment"
-  roles      = [aws_iam_role.limited_access_role.name]
-  policy_arn = aws_iam_policy.limited_access_policy.arn
+resource "aws_iam_policy_attachment" "pipeline_access_policy_attachment" {
+  name       = "pipeline_access_policy_attachment"
+  roles      = [aws_iam_role.pipeline_access_role.name]
+  policy_arn = aws_iam_policy.pipeline_access_policy.arn
 }
 
 resource "aws_iam_policy_attachment" "billing_policy_attachment" {

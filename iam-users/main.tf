@@ -48,8 +48,8 @@ locals {
   devops_groups               = compact(concat([var.devops_group_name], var.additional_admin_groups))
   developer_groups            = compact(concat([var.developer_group_name], var.additional_user_groups))
   power_user_groups           = compact(concat([var.power_user_group_name], var.additional_user_groups))
-  limited_groups              = compact(concat([var.limited_group_name], var.additional_limited_groups))
-  billing_groups              = compact(concat([var.billing_group_name], var.additional_limited_groups))
+  pipeline_groups              = compact(concat([var.pipeline_group_name], var.additional_pipeline_groups))
+  billing_groups              = compact(concat([var.billing_group_name], var.additional_pipeline_groups))
   user_multi_factor_auth_age  = var.user_multi_factor_auth_age * 60
   admin_multi_factor_auth_age = var.admin_multi_factor_auth_age * 60
 }
@@ -122,11 +122,11 @@ resource "aws_iam_policy" "developer_cli_policy" {
   policy = data.aws_iam_policy_document.developer_cli_policy.json
 }
 
-resource "aws_iam_policy" "limited_policy" {
-  name        = "limited_policy"
+resource "aws_iam_policy" "pipeline_policy" {
+  name        = "pipeline_policy"
   description = "Policy for Pipeline Users"
 
-  policy = data.aws_iam_policy_document.limited_policy.json
+  policy = data.aws_iam_policy_document.pipeline_policy.json
 }
 
 resource "aws_iam_account_alias" "iam_account_alias" {
@@ -158,7 +158,7 @@ resource "aws_iam_group" "groups" {
     local.devops_groups,
     local.developer_groups,
     local.power_user_groups,
-    local.limited_groups,
+    local.pipeline_groups,
     local.billing_groups,
   ))
   name = each.key
@@ -215,12 +215,12 @@ resource "aws_iam_group_policy" "assume_role_developer_access_group_policy" {
   policy = data.aws_iam_policy_document.assume_role_developer_access_group_policy_document.json
 }
 
-resource "aws_iam_group_policy" "assume_role_limited_access_group_policy" {
-  for_each = toset(local.limited_groups)
-  name     = "limited_access_group_policy"
+resource "aws_iam_group_policy" "assume_role_pipeline_access_group_policy" {
+  for_each = toset(local.pipeline_groups)
+  name     = "pipeline_access_group_policy"
   group    = aws_iam_group.groups[each.key].id
 
-  policy = data.aws_iam_policy_document.assume_role_limited_access_group_policy_document.json
+  policy = data.aws_iam_policy_document.assume_role_pipeline_access_group_policy_document.json
 }
 
 resource "aws_iam_group_policy" "assume_role_billing_access_group_policy" {

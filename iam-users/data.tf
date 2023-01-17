@@ -150,7 +150,7 @@ data "aws_iam_policy_document" "assume_role_developer_access_group_policy_docume
   }
 }
 
-data "aws_iam_policy_document" "assume_role_limited_access_group_policy_document" {
+data "aws_iam_policy_document" "assume_role_pipeline_access_group_policy_document" {
   statement {
     actions = [
       "sts:AssumeRole",
@@ -159,7 +159,7 @@ data "aws_iam_policy_document" "assume_role_limited_access_group_policy_document
     effect = "Allow"
 
     resources = [
-      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_limited_role_name}"
+      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_pipeline_role_name}"
     ]
   }
 }
@@ -623,7 +623,7 @@ data "aws_iam_policy_document" "developer_cli_policy" {
   }
 }
 
-data "aws_iam_policy_document" "limited_policy" {
+data "aws_iam_policy_document" "pipeline_policy" {
   statement {
     actions = [
       "iam:PassRole",

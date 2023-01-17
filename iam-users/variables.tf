@@ -66,7 +66,7 @@ variable "resource_developer_role_name" {
   default     = "Developer-Role"
 }
 
-variable "resource_limited_role_name" {
+variable "resource_pipeline_role_name" {
   type        = string
   description = "The name of the limited role one is supposed to assume in the resource account"
   default     = "Pipeline-Role"
@@ -102,7 +102,7 @@ variable "power_user_group_name" {
   default     = "PowerUsers"
 }
 
-variable "limited_group_name" {
+variable "pipeline_group_name" {
   type        = string
   description = "The name of the initial group created for limited console access users"
   default     = "Pipeline"
@@ -126,7 +126,7 @@ variable "additional_user_groups" {
   default     = []
 }
 
-variable "additional_limited_groups" {
+variable "additional_pipeline_groups" {
   type        = list(string)
   description = "A list of additional groups to create associated with limited users"
   default     = []

@@ -40,7 +40,7 @@ variable "developer_access_role_name" {
   default     = "Developer-Role"
 }
 
-variable "limited_access_role_name" {
+variable "pipeline_access_role_name" {
   type        = string
   description = "Name of the pipeline role"
   default     = "Pipeline-Role"
