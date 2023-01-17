@@ -293,16 +293,8 @@ data "aws_iam_policy_document" "devops_policy" {
 data "aws_iam_policy_document" "owner_billing_policy" {
   statement {
     actions = [
-      "aws-portal:BillingFullAccess",
-      "aws-portal:ModifyBilling",
-      "aws-portal:ViewBilling",
-      "aws-portal:ViewAccount",
-      "aws-portal:ModifyAccount",
-      "aws-portal:ViewPaymentMethods",
-      "aws-portal:ModifyPaymentMethods",
-      "aws-portal:ViewUsage",
-      "purchase-orders:ViewPurchaseOrders",
-      "purchase-orders:ModifyPurchaseOrders",
+      "aws-portal:*",
+      "purchase-orders:*",
     ]
 
     condition {
