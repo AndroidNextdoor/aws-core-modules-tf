@@ -15,10 +15,10 @@ output "power_user_group_names" {
 
 output "owner_group_names" {
   value       = values(aws_iam_group.groups)[*].name
-  description = "The name of the power user groups"
+  description = "The name of the owners groups"
 }
 
 output "billing_group_names" {
   value       = values(aws_iam_group.groups)[*].name
-  description = "The name of the power user groups"
+  description = "The name of the billing user groups"
 }
