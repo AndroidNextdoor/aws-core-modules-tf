@@ -85,6 +85,20 @@ resource "aws_iam_policy" "aws_mfa_self_service" {
   policy = data.aws_iam_policy_document.aws_mfa_self_service_policy.json
 }
 
+resource "aws_iam_policy" "owner_billing_policy" {
+  name        = "owner_billing_policy"
+  description = "Policy managing billing"
+
+  policy = data.aws_iam_policy_document.owner_billing_policy.json
+}
+
+resource "aws_iam_policy" "readonly_billing_policy" {
+  name        = "readonly_billing_policy"
+  description = "Policy viewing billing"
+
+  policy = data.aws_iam_policy_document.readonly_billing_policy.json
+}
+
 resource "aws_iam_policy" "devops_policy" {
   name        = "devops_policy"
   description = "Policy for DevOps Users"
@@ -154,6 +168,12 @@ resource "aws_iam_group" "groups" {
 }
 
 # Group policy assignments
+resource "aws_iam_policy_attachment" "owner_policy" {
+  name       = "owner_policy"
+  groups     = ["Owner"]
+  policy_arn = aws_iam_policy.owner_billing_policy.arn
+}
+
 resource "aws_iam_policy_attachment" "devops_policy" {
   name       = "devops_policy"
   groups     = ["DevOps"]
@@ -176,6 +196,12 @@ resource "aws_iam_policy_attachment" "limited_policy" {
   name       = "limited_policy"
   groups     = ["Limited"]
   policy_arn = aws_iam_policy.limited_policy.arn
+}
+
+resource "aws_iam_policy_attachment" "billing" {
+  name       = "billing_policy"
+  groups     = ["Billing"]
+  policy_arn = aws_iam_policy.readonly_billing_policy.arn
 }
 
 resource "aws_iam_policy_attachment" "users_mfa_self_service" {

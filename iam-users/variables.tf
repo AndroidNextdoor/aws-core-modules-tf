@@ -42,6 +42,12 @@ variable "resource_devops_role_name" {
   default     = "DevOps"
 }
 
+variable "resource_owner_role_name" {
+  type        = string
+  description = "The name of the owner role one is supposed to assume in the resource account"
+  default     = "Owner"
+}
+
 variable "resource_developer_role_name" {
   type        = string
   description = "The name of the developer role one is supposed to assume in the resource account"
@@ -54,13 +60,25 @@ variable "resource_limited_role_name" {
   default     = "Limited"
 }
 
-variable "admin_group_name" {
+variable "resource_billing_role_name" {
+  type        = string
+  description = "The name of the read-only billing role one is supposed to assume in the resource account"
+  default     = "Billing"
+}
+
+variable "owner_group_name" {
+  type        = string
+  description = "The name of the initial group created for ownership and billing"
+  default     = "Owner"
+}
+
+variable "devops_group_name" {
   type        = string
   description = "The name of the initial group created for administrators"
   default     = "DevOps"
 }
 
-variable "user_group_name" {
+variable "developer_group_name" {
   type        = string
   description = "The name of the initial group created for users"
   default     = "Developers"
@@ -76,6 +94,12 @@ variable "limited_group_name" {
   type        = string
   description = "The name of the initial group created for users"
   default     = "Limited"
+}
+
+variable "billing_group_name" {
+  type        = string
+  description = "The name of the initial group created for users"
+  default     = "Billing"
 }
 
 variable "additional_admin_groups" {
