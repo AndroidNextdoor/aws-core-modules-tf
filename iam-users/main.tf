@@ -188,7 +188,7 @@ resource "aws_iam_policy_attachment" "devops_policy" {
 
 resource "aws_iam_policy_attachment" "devops_full_policy" {
   name       = "devops_full_policy"
-  groups     = ["DevOps-Admins"]
+  groups     = ["DevOpsAdmins"]
   policy_arn = aws_iam_policy.devops_full_policy.arn
 }
 
