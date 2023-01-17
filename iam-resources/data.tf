@@ -141,12 +141,6 @@ data "aws_iam_policy_document" "power_user_access_role_policy" {
       values   = ["true"]
     }
 
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
-    }
-
     principals {
       type = "AWS"
 
