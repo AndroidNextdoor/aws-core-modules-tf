@@ -165,7 +165,8 @@ resource "aws_iam_group" "groups" {
     local.devops_groups,
     local.developer_groups,
     local.power_user_groups,
-    local.limited_groups
+    local.limited_groups,
+    local.billing_groups,
   ))
   name = each.key
 }

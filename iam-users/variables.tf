@@ -80,31 +80,31 @@ variable "owner_group_name" {
 
 variable "devops_group_name" {
   type        = string
-  description = "The name of the initial group created for administrators"
+  description = "The name of the initial group created for devops admins"
   default     = "DevOps"
 }
 
 variable "developer_group_name" {
   type        = string
-  description = "The name of the initial group created for users"
+  description = "The name of the initial group created for developers"
   default     = "Developers"
 }
 
 variable "power_user_group_name" {
   type        = string
-  description = "The name of the initial group created for users"
+  description = "The name of the initial group created for power users with cli access users"
   default     = "PowerUsers"
 }
 
 variable "limited_group_name" {
   type        = string
-  description = "The name of the initial group created for users"
+  description = "The name of the initial group created for limited console access users"
   default     = "Limited"
 }
 
 variable "billing_group_name" {
   type        = string
-  description = "The name of the initial group created for users"
+  description = "The name of the initial group created for billing users"
   default     = "Billing"
 }
 
