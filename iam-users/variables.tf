@@ -39,19 +39,19 @@ variable "resources_account_id" {
 variable "resource_devops_role_name" {
   type        = string
   description = "The name of the devops role one is supposed to assume in the resource account"
-  default     = "DevOps"
+  default     = "DevOps-Role"
 }
 
 variable "resource_owner_role_name" {
   type        = string
   description = "The name of the owner role one is supposed to assume in the resource account"
-  default     = "Owner"
+  default     = "Owner-Role"
 }
 
 variable "resource_power_user_role_name" {
   type        = string
   description = "The name of the owner role one is supposed to assume in the resource account"
-  default     = "PowerUser"
+  default     = "PowerUser-Role"
 }
 
 variable "resource_developer_role_name" {
@@ -63,13 +63,13 @@ variable "resource_developer_role_name" {
 variable "resource_limited_role_name" {
   type        = string
   description = "The name of the limited role one is supposed to assume in the resource account"
-  default     = "CI-CD"
+  default     = "Pipeline-Role"
 }
 
 variable "resource_billing_role_name" {
   type        = string
   description = "The name of the read-only billing role one is supposed to assume in the resource account"
-  default     = "Billing"
+  default     = "Billing-Role"
 }
 
 variable "owner_group_name" {

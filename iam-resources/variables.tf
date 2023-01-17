@@ -25,7 +25,7 @@ variable "user_multi_factor_auth_age" {
 variable "admin_access_role_name" {
   type        = string
   description = "Name of the admin role"
-  default     = "DevOps-Admin"
+  default     = "DevOps-Role"
 }
 
 variable "developer_access_role_name" {
@@ -55,5 +55,5 @@ variable "billing_access_role_name" {
 variable "power_user_access_role_name" {
   type        = string
   description = "Name of the power user role"
-  default     = "Power-User-Role"
+  default     = "PowerUser-Role"
 }
