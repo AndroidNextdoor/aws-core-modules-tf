@@ -198,12 +198,6 @@ data "aws_iam_policy_document" "assume_role_limited_access_group_policy_document
       "sts:AssumeRole",
     ]
 
-    condition {
-      test     = "Bool"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
-    }
-
     resources = [
       "arn:aws:iam::${local.resources_account_id}:role/${var.resource_limited_role_name}"
     ]
@@ -295,12 +289,6 @@ data "aws_iam_policy_document" "devops_policy" {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
       values   = ["true"]
-    }
-
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
     }
 
     resources = [
@@ -647,6 +635,8 @@ data "aws_iam_policy_document" "developer_cli_policy" {
       "s3:GetBucketVersioning",
     ]
 
+
+
     effect = "Allow"
 
     resources = [
@@ -741,6 +731,12 @@ data "aws_iam_policy_document" "limited_policy" {
       #      "ecr:UploadLayerPart",
       #      "ecr:CompleteLayerUpload",
     ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
 
     effect = "Allow"
 
