@@ -46,6 +46,11 @@ data "aws_iam_policy_document" "owner_billing_policy" {
       variable = "aws:MultiFactorAuthAge"
       values   = [local.user_multi_factor_auth_age]
     }
+
+    resources = [
+      "*"
+    ]
+
   }
 }
 
@@ -72,6 +77,10 @@ data "aws_iam_policy_document" "readonly_billing_policy" {
       variable = "aws:MultiFactorAuthAge"
       values   = [local.user_multi_factor_auth_age]
     }
+
+    resources = [
+      "*"
+    ]
   }
 }
 
