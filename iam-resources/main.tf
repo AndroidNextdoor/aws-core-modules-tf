@@ -66,7 +66,7 @@ resource "aws_iam_policy" "developer_access_policy" {
 
 resource "aws_iam_policy" "limited_access_policy" {
   name        = "limited_access_policy"
-  description = "Limited access for roles"
+  description = "Pipeline access for roles"
 
   policy = data.aws_iam_policy_document.user_access_policy_document.json
 }

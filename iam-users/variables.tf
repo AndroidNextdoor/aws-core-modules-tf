@@ -99,7 +99,7 @@ variable "power_user_group_name" {
 variable "limited_group_name" {
   type        = string
   description = "The name of the initial group created for limited console access users"
-  default     = "Limited"
+  default     = "Pipeline"
 }
 
 variable "billing_group_name" {

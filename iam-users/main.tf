@@ -124,7 +124,7 @@ resource "aws_iam_policy" "developer_cli_policy" {
 
 resource "aws_iam_policy" "limited_policy" {
   name        = "limited_policy"
-  description = "Policy for Limited Users"
+  description = "Policy for Pipeline Users"
 
   policy = data.aws_iam_policy_document.limited_policy.json
 }
