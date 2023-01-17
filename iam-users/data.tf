@@ -67,8 +67,6 @@ data "aws_iam_policy_document" "aws_list_iam_users_policy" {
 
 data "aws_iam_policy_document" "aws_mfa_self_service_policy" {
   statement {
-    effect = "Allow"
-
     actions = [
       "iam:DeactivateMFADevice",
       "iam:EnableMFADevice",
@@ -78,29 +76,41 @@ data "aws_iam_policy_document" "aws_mfa_self_service_policy" {
       "iam:ChangePassword",
     ]
 
+    effect = "Allow"
+
     resources = [
       "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/$${aws:username}",
     ]
   }
 
   statement {
+    actions = [
+      "iam:CreateVirtualMFADevice",
+    ]
+
     effect = "Allow"
 
     resources = [
       "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/*",
     ]
-
+  }
+  statement {
     actions = [
-      "iam:CreateVirtualMFADevice",
       "iam:DeleteVirtualMFADevice",
     ]
+
+    effect = "Allow"
+
+    resources = [
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/$${aws:username}",
+    ]
   }
+
 }
 
 # General Deny Policies
 data "aws_iam_policy_document" "general_deny_iam_policy_document" {
   statement {
-    effect = "Allow"
     actions = [
       "iam:CreateInstanceProfile",
       "iam:CreateServiceSpecificCredential",
@@ -142,6 +152,8 @@ data "aws_iam_policy_document" "general_deny_iam_policy_document" {
       "iam:DeleteSAMLProvider",
     ]
 
+    effect = "Allow"
+
     not_resources = [
       "arn:aws:iam::*",
     ]
@@ -151,8 +163,6 @@ data "aws_iam_policy_document" "general_deny_iam_policy_document" {
 # Group policies
 data "aws_iam_policy_document" "assume_role_devops_access_group_policy_document" {
   statement {
-    effect = "Allow"
-
     actions = [
       "sts:AssumeRole",
     ]
@@ -168,6 +178,8 @@ data "aws_iam_policy_document" "assume_role_devops_access_group_policy_document"
       variable = "aws:MultiFactorAuthAge"
       values   = [local.user_multi_factor_auth_age]
     }
+
+    effect = "Allow"
 
     resources = [
       "arn:aws:iam::${local.resources_account_id}:role/${var.resource_devops_role_name}",
@@ -178,8 +190,6 @@ data "aws_iam_policy_document" "assume_role_devops_access_group_policy_document"
 
 data "aws_iam_policy_document" "assume_role_developer_access_group_policy_document" {
   statement {
-    effect = "Allow"
-
     actions = [
       "sts:AssumeRole",
     ]
@@ -195,6 +205,8 @@ data "aws_iam_policy_document" "assume_role_developer_access_group_policy_docume
       variable = "aws:MultiFactorAuthAge"
       values   = [local.user_multi_factor_auth_age]
     }
+
+    effect = "Allow"
 
     resources = [
       "arn:aws:iam::${local.resources_account_id}:role/${var.resource_developer_role_name}"
@@ -204,8 +216,6 @@ data "aws_iam_policy_document" "assume_role_developer_access_group_policy_docume
 
 data "aws_iam_policy_document" "assume_role_limited_access_group_policy_document" {
   statement {
-    effect = "Allow"
-
     actions = [
       "sts:AssumeRole",
     ]
@@ -221,6 +231,8 @@ data "aws_iam_policy_document" "assume_role_limited_access_group_policy_document
       variable = "aws:MultiFactorAuthAge"
       values   = [local.user_multi_factor_auth_age]
     }
+
+    effect = "Allow"
 
     resources = [
       "arn:aws:iam::${local.resources_account_id}:role/${var.resource_limited_role_name}"
@@ -230,8 +242,6 @@ data "aws_iam_policy_document" "assume_role_limited_access_group_policy_document
 
 data "aws_iam_policy_document" "assume_role_owner_access_group_policy_document" {
   statement {
-    effect = "Allow"
-
     actions = [
       "sts:AssumeRole",
     ]
@@ -247,6 +257,8 @@ data "aws_iam_policy_document" "assume_role_owner_access_group_policy_document" 
       variable = "aws:MultiFactorAuthAge"
       values   = [local.user_multi_factor_auth_age]
     }
+
+    effect = "Allow"
 
     resources = [
       "arn:aws:iam::${local.resources_account_id}:role/${var.resource_owner_role_name}"
@@ -256,7 +268,6 @@ data "aws_iam_policy_document" "assume_role_owner_access_group_policy_document" 
 
 data "aws_iam_policy_document" "assume_role_power_user_access_group_policy_document" {
   statement {
-    effect = "Allow"
 
     actions = [
       "sts:AssumeRole",
@@ -268,11 +279,7 @@ data "aws_iam_policy_document" "assume_role_power_user_access_group_policy_docum
       values   = ["true"]
     }
 
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
-    }
+    effect = "Allow"
 
     resources = [
       "arn:aws:iam::${local.resources_account_id}:role/${var.resource_power_user_role_name}"
@@ -282,7 +289,6 @@ data "aws_iam_policy_document" "assume_role_power_user_access_group_policy_docum
 
 data "aws_iam_policy_document" "assume_role_billing_access_group_policy_document" {
   statement {
-    effect = "Allow"
 
     actions = [
       "sts:AssumeRole",
@@ -299,6 +305,8 @@ data "aws_iam_policy_document" "assume_role_billing_access_group_policy_document
       variable = "aws:MultiFactorAuthAge"
       values   = [local.user_multi_factor_auth_age]
     }
+
+    effect = "Allow"
 
     resources = [
       "arn:aws:iam::${local.resources_account_id}:role/${var.resource_billing_role_name}"
