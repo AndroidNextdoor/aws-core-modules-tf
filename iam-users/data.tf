@@ -34,12 +34,12 @@ data "aws_iam_policy_document" "aws_access_key_self_service_policy" {
 # This allows users without MFA to at least get a few details about their own account
 data "aws_iam_policy_document" "aws_list_iam_users_policy" {
   statement {
-    effect = "Allow"
-
     actions = [
       "iam:GetAccountSummary",
       "iam:List*",
     ]
+
+    effect = "Allow"
 
     # We need to use * here since the API calls for these don't accept resources
     #tfsec:ignore:aws-iam-no-policy-wildcards
@@ -87,19 +87,6 @@ data "aws_iam_policy_document" "aws_mfa_self_service_policy" {
     actions = [
       "iam:CreateVirtualMFADevice",
       "iam:DeleteVirtualMFADevice",
-    ]
-  }
-
-  statement {
-    effect = "Allow"
-
-    resources = [
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/*",
-    ]
-
-    actions = [
-      "iam:ListVirtualMFADevices",
-      "iam:ListMFADevices",
     ]
   }
 }
