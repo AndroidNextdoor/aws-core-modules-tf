@@ -19,6 +19,7 @@
 
 locals {
   administrator_access_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+  administrator_full_access_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
   iam_read_only_access_policy_arn = "arn:aws:iam::aws:policy/IAMReadOnlyAccess"
   power_user_access_policy_arn    = "arn:aws:iam::aws:policy/PowerUserAccess"
   users_account_id                = var.users_account_id == null ? data.aws_caller_identity.current.account_id : var.users_account_id
@@ -34,6 +35,12 @@ resource "aws_iam_account_alias" "iam_account_alias" {
 # Roles
 resource "aws_iam_role" "devops_access_role" {
   name = var.devops_access_role_name
+
+  assume_role_policy = data.aws_iam_policy_document.devops_access_role_policy.json
+}
+
+resource "aws_iam_role" "devops_full_access_role" {
+  name = var.devops_full_access_role_name
 
   assume_role_policy = data.aws_iam_policy_document.devops_access_role_policy.json
 }
@@ -70,6 +77,13 @@ resource "aws_iam_role" "billing_access_role" {
 
 resource "aws_iam_policy" "devops_access_policy" {
   name        = "devops_access_policy"
+  description = "DevOps access for roles"
+
+  policy = data.aws_iam_policy_document.user_access_policy_document.json
+}
+
+resource "aws_iam_policy" "devops_full_access_policy" {
+  name        = "devops_full_access_policy"
   description = "DevOps Admin access for roles"
 
   policy = data.aws_iam_policy_document.user_access_policy_document.json
@@ -93,14 +107,14 @@ resource "aws_iam_policy" "billing_access_policy" {
   name        = "billing_access_policy"
   description = "Billing access for roles"
 
-  policy = data.aws_iam_policy_document.billing_access_role_policy.json
+  policy = data.aws_iam_policy_document.user_access_policy_document.json
 }
 
 resource "aws_iam_policy" "power_user_access_policy" {
   name        = "power_user_access_policy"
   description = "Power User access for roles"
 
-  policy = data.aws_iam_policy_document.power_user_access_role_policy.json
+  policy = data.aws_iam_policy_document.user_access_policy_document.json
 }
 
 # Policy attachments for roles
@@ -111,9 +125,9 @@ resource "aws_iam_policy_attachment" "devops_access_policy_attachment" {
 }
 
 resource "aws_iam_policy_attachment" "devops_full_access_policy_attachment" {
-  name       = "devops_access_policy_attachment"
-  roles      = [aws_iam_role.devops_access_role.name]
-  policy_arn = aws_iam_policy.devops_access_policy.arn
+  name       = "devops_full_access_policy_attachment"
+  roles      = [aws_iam_role.devops_full_access_role.name]
+  policy_arn = aws_iam_policy.devops_full_access_policy.arn
 }
 
 resource "aws_iam_policy_attachment" "developer_access_policy_attachment" {

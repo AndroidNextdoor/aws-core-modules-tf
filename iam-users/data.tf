@@ -115,12 +115,6 @@ data "aws_iam_policy_document" "assume_role_devops_access_group_policy_document"
       values   = ["true"]
     }
 
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
-    }
-
     effect = "Allow"
 
     resources = [
@@ -251,7 +245,7 @@ data "aws_iam_policy_document" "assume_role_billing_access_group_policy_document
 }
 
 
-data "aws_iam_policy_document" "devops_policy" {
+data "aws_iam_policy_document" "devops_full_policy" {
   statement {
     actions = [
       "*"
@@ -263,12 +257,6 @@ data "aws_iam_policy_document" "devops_policy" {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
       values   = ["true"]
-    }
-
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
     }
 
     resources = [

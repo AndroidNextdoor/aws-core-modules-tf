@@ -39,6 +39,12 @@ data "aws_iam_policy_document" "developer_access_role_policy" {
       values   = ["true"]
     }
 
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
     principals {
       type = "AWS"
 
@@ -117,13 +123,6 @@ data "aws_iam_policy_document" "owner_access_role_policy" {
       values   = [local.user_multi_factor_auth_age]
     }
 
-    principals {
-      type = "AWS"
-
-      identifiers = [
-        "arn:aws:iam::${local.users_account_id}:root",
-      ]
-    }
   }
 }
 

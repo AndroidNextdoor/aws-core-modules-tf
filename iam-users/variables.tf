@@ -42,6 +42,12 @@ variable "resource_devops_role_name" {
   default     = "DevOps-Role"
 }
 
+variable "resource_devops_full_role_name" {
+  type        = string
+  description = "The name of the devops role one is supposed to assume in the resource account"
+  default     = "DevOps-Admin"
+}
+
 variable "resource_owner_role_name" {
   type        = string
   description = "The name of the owner role one is supposed to assume in the resource account"

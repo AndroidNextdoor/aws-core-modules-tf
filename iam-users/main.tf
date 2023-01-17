@@ -101,11 +101,11 @@ resource "aws_iam_policy" "readonly_billing_policy" {
   policy = data.aws_iam_policy_document.readonly_billing_policy.json
 }
 
-resource "aws_iam_policy" "devops_policy" {
-  name        = "devops_policy"
-  description = "Policy for DevOps Users"
+resource "aws_iam_policy" "devops_admin_policy" {
+  name        = "devops_admin_policy"
+  description = "Policy for DevOps Admin"
 
-  policy = data.aws_iam_policy_document.devops_policy.json
+  policy = data.aws_iam_policy_document.devops_full_policy.json
 }
 
 resource "aws_iam_policy" "developer_policy" {
