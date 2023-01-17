@@ -230,14 +230,6 @@ resource "aws_iam_group_policy" "assume_role_limited_access_group_policy" {
   policy = data.aws_iam_policy_document.assume_role_limited_access_group_policy_document.json
 }
 
-#resource "aws_iam_policy_attachment" "general_deny_iam_policy" {
-#  for_each   = toset(local.limited_groups)
-#  name       = "general_deny_iam_policy"
-#  group      = aws_iam_group.groups[each.key].id
-#
-#  policy_arn = aws_iam_policy.general_deny_iam_policy.arn
-#}
-
 resource "aws_iam_group_policy" "assume_role_billing_access_group_policy" {
   for_each = toset(local.billing_groups)
   name     = "billing_access_group_policy"

@@ -25,12 +25,6 @@ data "aws_iam_policy_document" "aws_access_key_self_service_policy" {
       values   = [local.user_multi_factor_auth_age]
     }
 
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
-    }
-
     resources = [
       "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/$${aws:username}",
     ]
@@ -108,58 +102,6 @@ data "aws_iam_policy_document" "aws_mfa_self_service_policy" {
 
 }
 
-# General Deny Policies
-data "aws_iam_policy_document" "general_deny_iam_policy_document" {
-  statement {
-    actions = [
-      "iam:CreateInstanceProfile",
-      "iam:CreateServiceSpecificCredential",
-      "iam:CreateGroup",
-      "iam:CreateRole",
-      "iam:CreateSAMLProvider",
-      "iam:CreateUser",
-      "iam:CreateOpenIDConnectProvider",
-      "iam:CreateAccessKey",
-      "iam:CreatePolicy",
-      "iam:CreateLoginProfile",
-      "iam:CreateServiceLinkedRole",
-      "iam:CreateAccountAlias",
-      "iam:Add*",
-      "iam:CreatePolicyVersion",
-      "iam:DeleteGroup",
-      "iam:RemoveRoleFromInstanceProfile",
-      "iam:DeletePolicy",
-      "iam:DeleteRolePermissionsBoundary",
-      "iam:RemoveUserFromGroup",
-      "iam:DeleteRolePolicy",
-      "iam:DeleteServerCertificate",
-      "iam:DeleteAccountAlias",
-      "iam:DeleteOpenIDConnectProvider",
-      "iam:DeleteLoginProfile",
-      "iam:DeleteInstanceProfile",
-      "iam:DeleteAccountPasswordPolicy",
-      "iam:RemoveClientIDFromOpenIDConnectProvider",
-      "iam:DeleteUserPolicy",
-      "iam:DeleteRole",
-      "iam:DeleteUser",
-      "iam:DeleteUserPermissionsBoundary",
-      "iam:DeleteSigningCertificate",
-      "iam:DeleteVirtualMFADevice",
-      "iam:DeleteServiceLinkedRole",
-      "iam:DeleteGroupPolicy",
-      "iam:DeleteServiceSpecificCredential",
-      "iam:DeletePolicyVersion",
-      "iam:DeleteSAMLProvider",
-    ]
-
-    effect = "Allow"
-
-    not_resources = [
-      "arn:aws:iam::*",
-    ]
-  }
-}
-
 # Group policies
 data "aws_iam_policy_document" "assume_role_devops_access_group_policy_document" {
   statement {
@@ -171,6 +113,12 @@ data "aws_iam_policy_document" "assume_role_devops_access_group_policy_document"
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
       values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
     }
 
     effect = "Allow"
@@ -261,6 +209,12 @@ data "aws_iam_policy_document" "assume_role_power_user_access_group_policy_docum
       values   = ["true"]
     }
 
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
     effect = "Allow"
 
     resources = [
@@ -309,6 +263,12 @@ data "aws_iam_policy_document" "devops_policy" {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
       values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
     }
 
     resources = [
@@ -659,6 +619,12 @@ data "aws_iam_policy_document" "developer_cli_policy" {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
       values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
     }
 
     effect = "Allow"

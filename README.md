@@ -184,7 +184,7 @@ module "iam_resources" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_admin_access_role_name"></a> [admin\_access\_role\_name](#input\_admin\_access\_role\_name) | Name of the admin role | `string` | `"resource-admin"` | no |
+| <a name="input_devops_access_role_name"></a> [admin\_access\_role\_name](#input\_admin\_access\_role\_name) | Name of the admin role | `string` | `"resource-admin"` | no |
 | <a name="input_admin_multi_factor_auth_age"></a> [admin\_multi\_factor\_auth\_age](#input\_admin\_multi\_factor\_auth\_age) | The amount of time (in minutes) for a admin session to be valid | `number` | `60` | no |
 | <a name="input_iam_account_alias"></a> [iam\_account\_alias](#input\_iam\_account\_alias) | A globally unique identifier, human-readable for your AWS account | `string` | `null` | no |
 | <a name="input_developer_access_role_name"></a> [user\_access\_role\_name](#input\_user\_access\_role\_name) | Name of the user role | `string` | `"resource-user"` | no |

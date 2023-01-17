@@ -1,7 +1,7 @@
 data "aws_caller_identity" "current" {}
 
 # AssumeRole policies to enforce MFA when assuming these from either the same or a different account
-data "aws_iam_policy_document" "admin_access_role_policy" {
+data "aws_iam_policy_document" "devops_access_role_policy" {
   statement {
     effect = "Allow"
 
@@ -165,7 +165,7 @@ data "aws_iam_policy_document" "user_access_policy_document" {
 
     not_resources = [
       aws_iam_role.developer_access_role.arn,
-      aws_iam_role.admin_access_role.arn,
+      aws_iam_role.devops_access_role.arn,
       aws_iam_role.power_user_access_role.arn,
       aws_iam_role.billing_access_role.arn,
       aws_iam_role.owner_access_role.arn,

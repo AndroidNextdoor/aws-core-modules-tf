@@ -22,7 +22,7 @@ variable "user_multi_factor_auth_age" {
   default     = 240 # 4 hours
 }
 
-variable "admin_access_role_name" {
+variable "devops_access_role_name" {
   type        = string
   description = "Name of the admin role"
   default     = "DevOps-Role"
