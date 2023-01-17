@@ -63,7 +63,7 @@ variable "resource_developer_role_name" {
 variable "resource_limited_role_name" {
   type        = string
   description = "The name of the limited role one is supposed to assume in the resource account"
-  default     = "Limited"
+  default     = "CI-CD"
 }
 
 variable "resource_billing_role_name" {
