@@ -48,8 +48,7 @@ data "aws_iam_policy_document" "owner_billing_policy" {
     }
 
     resources = [
-      "aws-portal:*",
-      "purchase-orders::*",
+      "*"
     ]
   }
 }
@@ -79,8 +78,7 @@ data "aws_iam_policy_document" "readonly_billing_policy" {
     }
 
     resources = [
-      "aws-portal:*",
-      "purchase-orders::*",
+      "*"
     ]
   }
 }
