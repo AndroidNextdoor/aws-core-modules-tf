@@ -303,12 +303,6 @@ data "aws_iam_policy_document" "owner_billing_policy" {
       values   = ["true"]
     }
 
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
-    }
-
     effect = "Allow"
 
     resources = [
