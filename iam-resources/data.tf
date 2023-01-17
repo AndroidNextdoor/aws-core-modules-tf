@@ -15,12 +15,6 @@ data "aws_iam_policy_document" "admin_access_role_policy" {
       values   = ["true"]
     }
 
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.admin_multi_factor_auth_age]
-    }
-
     principals {
       type = "AWS"
 
@@ -43,12 +37,6 @@ data "aws_iam_policy_document" "developer_access_role_policy" {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
       values   = ["true"]
-    }
-
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
     }
 
     principals {
