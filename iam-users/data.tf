@@ -25,6 +25,12 @@ data "aws_iam_policy_document" "aws_access_key_self_service_policy" {
       values   = [local.user_multi_factor_auth_age]
     }
 
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
     resources = [
       "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/$${aws:username}",
     ]
@@ -157,6 +163,12 @@ data "aws_iam_policy_document" "assume_role_devops_access_group_policy_document"
       values   = ["true"]
     }
 
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
     resources = [
       "arn:aws:iam::${local.resources_account_id}:role/${var.resource_devops_role_name}",
     ]
@@ -197,6 +209,18 @@ data "aws_iam_policy_document" "assume_role_limited_access_group_policy_document
     actions = [
       "sts:AssumeRole",
     ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
 
     resources = [
       "arn:aws:iam::${local.resources_account_id}:role/${var.resource_limited_role_name}"
@@ -244,6 +268,12 @@ data "aws_iam_policy_document" "assume_role_power_user_access_group_policy_docum
       values   = ["true"]
     }
 
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
     resources = [
       "arn:aws:iam::${local.resources_account_id}:role/${var.resource_power_user_role_name}"
     ]
@@ -289,6 +319,12 @@ data "aws_iam_policy_document" "devops_policy" {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
       values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
     }
 
     resources = [
@@ -635,7 +671,17 @@ data "aws_iam_policy_document" "developer_cli_policy" {
       "s3:GetBucketVersioning",
     ]
 
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
 
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
 
     effect = "Allow"
 
@@ -736,6 +782,12 @@ data "aws_iam_policy_document" "limited_policy" {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
       values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
     }
 
     effect = "Allow"
