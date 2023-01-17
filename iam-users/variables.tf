@@ -36,16 +36,22 @@ variable "resources_account_id" {
   default     = ""
 }
 
-variable "resource_admin_role_name" {
+variable "resource_devops_role_name" {
   type        = string
-  description = "The name of the administrator role one is supposed to assume in the resource account"
+  description = "The name of the devops role one is supposed to assume in the resource account"
   default     = "DevOps"
 }
 
-variable "resource_user_role_name" {
+variable "resource_developer_role_name" {
   type        = string
-  description = "The name of the user role one is supposed to assume in the resource account"
+  description = "The name of the developer role one is supposed to assume in the resource account"
   default     = "Developer"
+}
+
+variable "resource_limited_role_name" {
+  type        = string
+  description = "The name of the limited role one is supposed to assume in the resource account"
+  default     = "Limited"
 }
 
 variable "admin_group_name" {

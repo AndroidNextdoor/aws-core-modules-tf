@@ -37,5 +37,5 @@ variable "developer_access_role_name" {
 variable "limited_access_role_name" {
   type        = string
   description = "Name of the limited role"
-  default     = "General-QA-Role"
+  default     = "Pipeline-Role"
 }

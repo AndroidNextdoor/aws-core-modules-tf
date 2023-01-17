@@ -13,18 +13,13 @@ data "aws_iam_policy_document" "devops_policy" {
       values   = ["true"]
     }
 
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
-    }
-
     resources = [
       "*",
     ]
   }
 }
 
+## UPDATE THESE FOR YOUR DEVELOPERS NEEDS
 data "aws_iam_policy_document" "developer_policy" {
   statement {
     actions = [
@@ -35,34 +30,6 @@ data "aws_iam_policy_document" "developer_policy" {
       "ec2:ModifyLaunchTemplate",
       "ec2:CreateLaunchTemplateVersion",
       "elasticloadbalancing:Describe*",
-      "autoscaling:Describe*",
-      "autoscaling:CreateOrUpdateTags",
-      "autoscaling:ExitStandby",
-      "autoscaling:BatchPutScheduledUpdateGroupAction",
-      "autoscaling:EnterStandby",
-      "autoscaling:ExecutePolicy",
-      "autoscaling:UpdateAutoScalingGroup",
-      "autoscaling:SetInstanceHealth",
-      "autoscaling:TerminateInstanceInAutoScalingGroup",
-      "autoscaling:AttachLoadBalancers",
-      "autoscaling:DetachLoadBalancers",
-      "autoscaling:BatchDeleteScheduledAction",
-      "autoscaling:EnableMetricsCollection",
-      "autoscaling:ResumeProcesses",
-      "autoscaling:SetDesiredCapacity",
-      "autoscaling:Put*",
-      "autoscaling:DetachLoadBalancerTargetGroups",
-      "autoscaling:SuspendProcesses",
-      "autoscaling:StartInstanceRefresh",
-      "autoscaling:AttachLoadBalancerTargetGroups",
-      "autoscaling:CreateLaunchConfiguration",
-      "autoscaling:AttachInstances",
-      "autoscaling:CompleteLifecycleAction",
-      "autoscaling:DisableMetricsCollection",
-      "autoscaling:SetInstanceProtection",
-      "autoscaling:CancelInstanceRefresh",
-      "autoscaling:DetachInstances",
-      "autoscaling:CreateAutoScalingGroup",
       "apigateway:UpdateRestApiPolicy",
       "apigateway:SetWebACL",
       "apigateway:PUT",
@@ -154,11 +121,6 @@ data "aws_iam_policy_document" "developer_policy" {
       "cloudwatch:Enable*",
       "cloudwatch:Put*",
       "cloudwatch:Set*",
-      "mobiletargeting:TagResource",
-      "mobiletargeting:Get*",
-      "mobiletargeting:UntagResource",
-      "mobiletargeting:PhoneNumberValidate",
-      "mobiletargeting:List*",
       "sms-voice:Get*",
       "sms-voice:List*",
       "ecr:Get*",
@@ -187,17 +149,6 @@ data "aws_iam_policy_document" "developer_policy" {
       "ecs:UpdateService",
       "redshift:Describe*",
       "redshift:ViewQueriesInConsole",
-      "waf-regional:Get*",
-      "waf-regional:TagResource",
-      "waf-regional:UntagResource",
-      "waf-regional:List*",
-      "wafv2:CheckCapacity",
-      "wafv2:TagResource",
-      "wafv2:Describe*",
-      "wafv2:UntagResource",
-      "wafv2:AssociateWebACL",
-      "wafv2:Get*",
-      "wafv2:List*",
       "sts:GetAccessKeyInfo",
       "sts:GetSessionToken",
       "dynamodb:*",
@@ -210,7 +161,6 @@ data "aws_iam_policy_document" "developer_policy" {
       "s3:GetObjectTagging",
       "s3:ListBucket",
       "s3:GetBucketVersioning",
-      "iam:CreateVirtualMFADevice"
     ]
 
     effect = "Allow"
@@ -225,6 +175,129 @@ data "aws_iam_policy_document" "developer_policy" {
       test     = "NumericLessThan"
       variable = "aws:MultiFactorAuthAge"
       values   = [local.user_multi_factor_auth_age]
+    }
+
+    resources = [
+      "*",
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "developer_cli_policy" {
+  statement {
+    actions = [
+      "ec2:Describe*",
+      "ec2:Get*",
+      "ec2:CreateTags",
+      "ec2:CreateLaunchTemplate",
+      "ec2:ModifyLaunchTemplate",
+      "ec2:CreateLaunchTemplateVersion",
+      "elasticloadbalancing:Describe*",
+      "apigateway:UpdateRestApiPolicy",
+      "apigateway:SetWebACL",
+      "apigateway:PUT",
+      "apigateway:PATCH",
+      "apigateway:POST",
+      "apigateway:GET",
+      "apigateway:DELETE",
+      "cloudtrail:Get*",
+      "cloudtrail:Describe*",
+      "cloudtrail:List*",
+      "codebuild:List*",
+      "codebuild:Batch*",
+      "codebuild:Get*",
+      "codebuild:Describe*",
+      "codepipeline:List*",
+      "codepipeline:Get*",
+      "cognito-idp:Admin*",
+      "cognito-idp:List*",
+      "cognito-idp:Get*",
+      "cognito-idp:Describe*",
+      "cognito-idp:Update*",
+      "cognito-idp:Create*",
+      "cognito-idp:Set*",
+      "cognito-idp:TagResource",
+      "cognito-idp:ConfirmForgotPassword",
+      "cognito-idp:AddCustomAttributes",
+      "cognito-idp:ConfirmSignUp",
+      "cognito-idp:SignUp",
+      "cognito-idp:VerifyUserAttribute",
+      "cognito-idp:StartUserImportJob",
+      "cognito-idp:AssociateSoftwareToken",
+      "cognito-idp:VerifySoftwareToken",
+      "cognito-idp:RespondToAuthChallenge",
+      "cognito-idp:UntagResource",
+      "cognito-idp:StopUserImportJob",
+      "cognito-idp:ChangePassword",
+      "cognito-idp:InitiateAuth",
+      "cognito-idp:ConfirmDevice",
+      "cognito-idp:ResendConfirmationCode",
+      "cognito-identity:LookupDeveloperIdentity",
+      "cognito-identity:MergeDeveloperIdentities",
+      "cognito-identity:UnlinkDeveloperIdentity",
+      "iam:Get*",
+      "iam:List*",
+      "logs:StartQuery",
+      "logs:StopQuery",
+      "logs:TestMetricFilter",
+      "logs:FilterLogEvents",
+      "logs:GetLogDelivery",
+      "logs:Describe*",
+      "logs:List*",
+      "cloudwatch:List*",
+      "cloudwatch:Describe*",
+      "cloudwatch:Get*",
+      "cloudwatch:Enable*",
+      "cloudwatch:Put*",
+      "cloudwatch:Set*",
+      "sms-voice:Get*",
+      "sms-voice:List*",
+      "ecr:Get*",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:DescribeRepositories",
+      "ecr:List*",
+      "ecr:DescribeImages",
+      "ecr:DescribeImageScanFindings",
+      "ecr:InitiateLayerUpload",
+      "ecr:UploadLayerPart",
+      "ecr:CompleteLayerUpload",
+      "ecr:PutImage",
+      "ecs:CreateService",
+      "ecs:DeleteService",
+      "ecs:DeregisterTaskDefinition",
+      "ecs:DescribeClusters",
+      "ecs:DescribeContainerInstances",
+      "ecs:DescribeServices",
+      "ecs:DescribeTaskDefinition",
+      "ecs:DescribeTasks",
+      "ecs:Poll",
+      "ecs:RegisterTaskDefinition",
+      "ecs:RunTask",
+      "ecs:StartTask",
+      "ecs:StopTask",
+      "ecs:UpdateService",
+      "redshift:Describe*",
+      "redshift:ViewQueriesInConsole",
+      "sts:GetAccessKeyInfo",
+      "sts:GetSessionToken",
+      "dynamodb:*",
+      "es:ESHttp*",
+      "es:Describe*",
+      "es:List*",
+      "s3:GetBucketTagging",
+      "s3:GetObjectVersionTagging",
+      "s3:ListBucketVersions",
+      "s3:GetObjectTagging",
+      "s3:ListBucket",
+      "s3:GetBucketVersioning",
+    ]
+
+    effect = "Allow"
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
     }
 
     resources = [
@@ -326,12 +399,6 @@ data "aws_iam_policy_document" "limited_policy" {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
       values   = ["true"]
-    }
-
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
     }
 
     resources = [

@@ -170,14 +170,8 @@ data "aws_iam_policy_document" "assume_role_admin_access_group_policy_document" 
       values   = ["true"]
     }
 
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.admin_multi_factor_auth_age]
-    }
-
     resources = [
-      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_admin_role_name}",
+      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_devops_role_name}",
     ]
   }
 }
@@ -204,7 +198,7 @@ data "aws_iam_policy_document" "assume_role_users_access_group_policy_document" 
     }
 
     resources = [
-      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_user_role_name}"
+      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_developer_role_name}"
     ]
   }
 }
@@ -223,8 +217,14 @@ data "aws_iam_policy_document" "assume_role_limited_access_group_policy_document
       values   = ["false"]
     }
 
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = [local.user_multi_factor_auth_age]
+    }
+
     resources = [
-      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_user_role_name}"
+      "arn:aws:iam::${local.resources_account_id}:role/${var.resource_limited_role_name}"
     ]
   }
 }

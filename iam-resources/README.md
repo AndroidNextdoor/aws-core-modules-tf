@@ -33,6 +33,6 @@ module "iam_resources" {
 | Name | Description |
 |------|-------------|
 | <a name="output_resource_admin_role_arn"></a> [resource\_admin\_role\_arn](#output\_resource\_admin\_role\_arn) | The ARN of the role users are able to assume to attain admin privileges |
-| <a name="output_resource_admin_role_name"></a> [resource\_admin\_role\_name](#output\_resource\_admin\_role\_name) | The name of the role users are able to assume to attain admin privileges |
+| <a name="output_resource_devops_role_name"></a> [resource\_admin\_role\_name](#output\_resource\_admin\_role\_name) | The name of the role users are able to assume to attain admin privileges |
 | <a name="output_resource_user_role_arn"></a> [resource\_user\_role\_arn](#output\_resource\_user\_role\_arn) | The ARN of the role users are able to assume to attain user privileges |
-| <a name="output_resource_user_role_name"></a> [resource\_user\_role\_name](#output\_resource\_user\_role\_name) | The name of the role users are able to assume to attain user privileges |
+| <a name="output_resource_developer_role_name"></a> [resource\_user\_role\_name](#output\_resource\_user\_role\_name) | The name of the role users are able to assume to attain user privileges |

@@ -5,3 +5,4 @@
 /**/*/*.tfstate*
 !/tests/mocks/mock_provider.tf
 /**/*.lock.hcl
+/.idea/*

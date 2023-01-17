@@ -98,6 +98,13 @@ resource "aws_iam_policy" "developer_policy" {
   policy = data.aws_iam_policy_document.developer_policy.json
 }
 
+resource "aws_iam_policy" "developer_cli_policy" {
+  name        = "developer_cli_policy"
+  description = "Policy for Developers that need cli access to aws resources without an active mfa token"
+
+  policy = data.aws_iam_policy_document.developer_cli_policy.json
+}
+
 resource "aws_iam_policy" "limited_policy" {
   name        = "limited_policy"
   description = "Policy for Limited Users"
@@ -155,6 +162,12 @@ resource "aws_iam_policy_attachment" "developer_policy" {
   name       = "developer_policy"
   groups     = ["Developers"]
   policy_arn = aws_iam_policy.developer_policy.arn
+}
+
+resource "aws_iam_policy_attachment" "developer_cli_policy" {
+  name       = "developer_cli_policy"
+  groups     = ["Developers"]
+  policy_arn = aws_iam_policy.developer_cli_policy.arn
 }
 
 resource "aws_iam_policy_attachment" "limited_policy" {
