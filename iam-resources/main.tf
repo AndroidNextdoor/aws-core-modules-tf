@@ -104,11 +104,11 @@ resource "aws_iam_policy" "power_user_access_policy" {
 }
 
 # Policy attachments for roles
-#resource "aws_iam_policy_attachment" "devops_access_policy_attachment" {
-#  name       = "devops_access_policy_attachment"
-#  roles      = [aws_iam_role.devops_access_role.name]
-#  policy_arn = local.administrator_access_policy_arn
-#}
+resource "aws_iam_policy_attachment" "devops_access_policy_attachment" {
+  name       = "devops_access_policy_attachment"
+  roles      = [aws_iam_role.devops_access_role.name]
+  policy_arn = local.administrator_access_policy_arn
+}
 
 resource "aws_iam_policy_attachment" "devops_full_access_policy_attachment" {
   name       = "devops_access_policy_attachment"
