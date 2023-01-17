@@ -293,6 +293,7 @@ data "aws_iam_policy_document" "devops_policy" {
 data "aws_iam_policy_document" "owner_billing_policy" {
   statement {
     actions = [
+      "aws-portal:BillingFullAccess",
       "aws-portal:ModifyBilling",
       "aws-portal:ViewBilling",
       "aws-portal:ViewAccount",
@@ -328,6 +329,7 @@ data "aws_iam_policy_document" "owner_billing_policy" {
 data "aws_iam_policy_document" "readonly_billing_policy" {
   statement {
     actions = [
+      "aws-portal:BillingFullAccess",
       "aws-portal:ViewBilling",
       "aws-portal:ViewAccount",
       "aws-portal:ViewPaymentMethods",
