@@ -6,7 +6,7 @@ A module to configure the "users" account modeled after a common security princi
 ![AWS IAM setup illustration](https://raw.githubusercontent.com/AndroidNextdoor/aws-core-modules-tf/main/files/aws_iam_setup.png)
 
 These strict separation of privileges follow [an article I wrote a while ago](https://www.thoughtworks.com/insights/blog/using-aws-security-first-class-citizen).
-You can also create IAM users and IAM groups with this module and assign the users to specific groups. The module will create two default groups, one for admins and users, which you can disable by setting the `admin_group_name` and `user_group_name` to an empty string.
+You can also create IAM users and IAM groups with this module and assign the users to specific groups. The module will create two default groups, one for admins and users, which you can disable by setting the `devops_group_name` and `user_group_name` to an empty string.
 
 Creating additional users is done by passing a map called `users` to the module, with a group mapping attached to them (the best practice is to never have users live "outside" of groups).
 
@@ -42,7 +42,7 @@ This will run the module and create all the necessary permissions along with a u
 |------|-------------|------|---------|:--------:|
 | <a name="input_additional_admin_groups"></a> [additional\_admin\_groups](#input\_additional\_admin\_groups) | A list of additional groups to create associated with administrative privileges | `list(string)` | `[]` | no |
 | <a name="input_additional_user_groups"></a> [additional\_user\_groups](#input\_additional\_user\_groups) | A list of additional groups to create associated with regular users | `list(string)` | `[]` | no |
-| <a name="input_admin_group_name"></a> [admin\_group\_name](#input\_admin\_group\_name) | The name of the initial group created for administrators | `string` | `"admins"` | no |
+| <a name="input_devops_group_name"></a> [admin\_group\_name](#input\_admin\_group\_name) | The name of the initial group created for administrators | `string` | `"admins"` | no |
 | <a name="input_admin_multi_factor_auth_age"></a> [admin\_multi\_factor\_auth\_age](#input\_admin\_multi\_factor\_auth\_age) | The amount of time (in minutes) for a admin session to be valid | `number` | `60` | no |
 | <a name="input_iam_account_alias"></a> [iam\_account\_alias](#input\_iam\_account\_alias) | A globally unique, human-readable identifier for your AWS account | `string` | `null` | no |
 | <a name="input_iam_users"></a> [iam\_users](#input\_iam\_users) | A list of maps of users and their groups. Default is to create no users. | `map(map(list(string)))` | `{}` | no |
@@ -57,5 +57,5 @@ This will run the module and create all the necessary permissions along with a u
 
 | Name | Description |
 |------|-------------|
-| <a name="output_admin_group_names"></a> [admin\_group\_names](#output\_admin\_group\_names) | The names of the admin groups |
+| <a name="output_devops_group_names"></a> [admin\_group\_names](#output\_admin\_group\_names) | The names of the admin groups |
 | <a name="output_user_group_names"></a> [user\_group\_names](#output\_user\_group\_names) | The name of the user groups |

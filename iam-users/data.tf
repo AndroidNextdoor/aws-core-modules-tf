@@ -156,7 +156,7 @@ data "aws_iam_policy_document" "general_deny_iam_policy_document" {
 }
 
 # Group policies
-data "aws_iam_policy_document" "assume_role_admin_access_group_policy_document" {
+data "aws_iam_policy_document" "assume_role_devops_access_group_policy_document" {
   statement {
     effect = "Allow"
 
@@ -177,7 +177,7 @@ data "aws_iam_policy_document" "assume_role_admin_access_group_policy_document" 
 }
 
 
-data "aws_iam_policy_document" "assume_role_users_access_group_policy_document" {
+data "aws_iam_policy_document" "assume_role_developer_access_group_policy_document" {
   statement {
     effect = "Allow"
 

@@ -7,7 +7,7 @@
 * ![AWS IAM setup illustration](https://raw.githubusercontent.com/AndroidNextdoor/aws-core-modules-tf/main/files/aws_iam_setup.png)
 * 
 * These strict separation of privileges follow [an article I wrote a while ago](https://www.thoughtworks.com/insights/blog/using-aws-security-first-class-citizen).
-* You can also create IAM users and IAM groups with this module and assign the users to specific groups. The module will create two default groups, one for admins and users, which you can disable by setting the `admin_group_name` and `user_group_name` to an empty string.
+* You can also create IAM users and IAM groups with this module and assign the users to specific groups. The module will create two default groups, one for admins and users, which you can disable by setting the `devops_group_name` and `user_group_name` to an empty string.
 * 
 * Creating additional users is done by passing a map called `users` to the module, with a group mapping attached to them (the best practice is to never have users live "outside" of groups).
 *
@@ -44,10 +44,11 @@ locals {
     max_password_age               = "90"
     allow_users_to_change_password = "true"
   }, var.password_policy)
-  admin_groups                = compact(concat([var.admin_group_name], var.additional_admin_groups))
-  user_groups                 = compact(concat([var.user_group_name], var.additional_user_groups))
+  admin_groups                = compact(concat([var.devops_group_name], var.additional_admin_groups))
+  user_groups                 = compact(concat([var.developer_group_name], var.additional_user_groups))
   power_user_groups           = compact(concat([var.power_user_group_name], var.additional_user_groups))
   limited_groups              = compact(concat([var.limited_group_name], var.additional_limited_groups))
+  billing_groups              = compact(concat([var.billing_group_name], var.additional_limited_groups))
   user_multi_factor_auth_age  = var.user_multi_factor_auth_age * 60
   admin_multi_factor_auth_age = var.admin_multi_factor_auth_age * 60
 }
@@ -228,20 +229,20 @@ resource "aws_iam_policy_attachment" "users_list_iam_users" {
   policy_arn = aws_iam_policy.aws_list_iam_users.arn
 }
 
-resource "aws_iam_group_policy" "assume_role_admin_access_group_policy" {
+resource "aws_iam_group_policy" "assume_role_devops_access_group_policy" {
   for_each = toset(local.admin_groups)
-  name     = "admin_access_group_policy"
+  name     = "devops_access_group_policy"
   group    = aws_iam_group.groups[each.key].id
 
-  policy = data.aws_iam_policy_document.assume_role_admin_access_group_policy_document.json
+  policy = data.aws_iam_policy_document.assume_role_devops_access_group_policy_document.json
 }
 
-resource "aws_iam_group_policy" "assume_role_users_access_group_policy" {
+resource "aws_iam_group_policy" "assume_role_developer_access_group_policy" {
   for_each = toset(local.user_groups)
-  name     = "users_access_group_policy"
+  name     = "developer_access_group_policy"
   group    = aws_iam_group.groups[each.key].id
 
-  policy = data.aws_iam_policy_document.assume_role_users_access_group_policy_document.json
+  policy = data.aws_iam_policy_document.assume_role_developer_access_group_policy_document.json
 }
 
 resource "aws_iam_group_policy" "assume_role_limited_access_group_policy" {
