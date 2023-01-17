@@ -31,35 +31,35 @@ variable "devops_full_access_role_name" {
 variable "devops_access_role_name" {
   type        = string
   description = "Name of the admin role"
-  default     = "DevOps-Role"
+  default     = "DevOps"
 }
 
 variable "developer_access_role_name" {
   type        = string
   description = "Name of the user role"
-  default     = "Developer-Role"
+  default     = "Developer"
 }
 
 variable "pipeline_access_role_name" {
   type        = string
   description = "Name of the pipeline role"
-  default     = "Pipeline-Role"
+  default     = "Pipeline"
 }
 
 variable "owner_access_role_name" {
   type        = string
   description = "Name of the owner role"
-  default     = "Owner-Role"
+  default     = "Owner"
 }
 
 variable "billing_access_role_name" {
   type        = string
   description = "Name of the billing role"
-  default     = "Billing-Role"
+  default     = "Billing"
 }
 
 variable "power_user_access_role_name" {
   type        = string
   description = "Name of the power user role"
-  default     = "PowerUser-Role"
+  default     = "PowerUser"
 }
