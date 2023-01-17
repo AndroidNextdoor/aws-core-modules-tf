@@ -335,8 +335,6 @@ data "aws_iam_policy_document" "devops_policy" {
 
 data "aws_iam_policy_document" "owner_billing_policy" {
   statement {
-    effect = "Allow"
-
     actions = [
       "aws-portal:ModifyBilling",
       "aws-portal:ViewBilling",
@@ -361,6 +359,8 @@ data "aws_iam_policy_document" "owner_billing_policy" {
       values   = [local.user_multi_factor_auth_age]
     }
 
+    effect = "Allow"
+
     resources = [
       "*"
     ]
@@ -370,8 +370,6 @@ data "aws_iam_policy_document" "owner_billing_policy" {
 
 data "aws_iam_policy_document" "readonly_billing_policy" {
   statement {
-    effect = "Allow"
-
     actions = [
       "aws-portal:ViewBilling",
       "aws-portal:ViewAccount",
@@ -391,6 +389,8 @@ data "aws_iam_policy_document" "readonly_billing_policy" {
       variable = "aws:MultiFactorAuthAge"
       values   = [local.user_multi_factor_auth_age]
     }
+
+    effect = "Allow"
 
     resources = [
       "*"
@@ -542,8 +542,6 @@ data "aws_iam_policy_document" "developer_policy" {
       "s3:GetBucketVersioning",
     ]
 
-    effect = "Allow"
-
     condition {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
@@ -555,6 +553,8 @@ data "aws_iam_policy_document" "developer_policy" {
       variable = "aws:MultiFactorAuthAge"
       values   = [local.user_multi_factor_auth_age]
     }
+
+    effect = "Allow"
 
     resources = [
       "*",
@@ -677,12 +677,6 @@ data "aws_iam_policy_document" "developer_cli_policy" {
       values   = ["true"]
     }
 
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
-    }
-
     effect = "Allow"
 
     resources = [
@@ -777,18 +771,6 @@ data "aws_iam_policy_document" "limited_policy" {
       #      "ecr:UploadLayerPart",
       #      "ecr:CompleteLayerUpload",
     ]
-
-    condition {
-      test     = "Bool"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
-    }
-
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [local.user_multi_factor_auth_age]
-    }
 
     effect = "Allow"
 
