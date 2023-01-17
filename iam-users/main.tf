@@ -178,12 +178,6 @@ resource "aws_iam_policy_attachment" "users_mfa_self_service" {
   policy_arn = aws_iam_policy.aws_mfa_self_service.arn
 }
 
-#resource "aws_iam_policy_attachment" "general_deny_iam_policy" {
-#  name       = "general_deny_iam_policy"
-#  groups     = values(aws_iam_group.groups)[*].name
-#  policy_arn = aws_iam_policy.general_deny_iam_policy.arn
-#}
-
 resource "aws_iam_policy_attachment" "users_access_key_self_service" {
   name       = "users_access_key_self_service"
   groups     = values(aws_iam_group.groups)[*].name
@@ -235,6 +229,14 @@ resource "aws_iam_group_policy" "assume_role_limited_access_group_policy" {
 
   policy = data.aws_iam_policy_document.assume_role_limited_access_group_policy_document.json
 }
+
+#resource "aws_iam_policy_attachment" "general_deny_iam_policy" {
+#  for_each   = toset(local.limited_groups)
+#  name       = "general_deny_iam_policy"
+#  group      = aws_iam_group.groups[each.key].id
+#
+#  policy_arn = aws_iam_policy.general_deny_iam_policy.arn
+#}
 
 resource "aws_iam_group_policy" "assume_role_billing_access_group_policy" {
   for_each = toset(local.billing_groups)
