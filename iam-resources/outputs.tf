@@ -8,6 +8,16 @@ output "resource_devops_admin_role_arn" {
   description = "The ARN of the role users are able to assume to attain admin privileges"
 }
 
+output "resource_devops_role_name" {
+  value       = aws_iam_role.devops_access_role.name
+  description = "The name of the role devops are able to assume to attain admin privileges"
+}
+
+output "resource_devops_role_arn" {
+  value       = aws_iam_role.devops_access_role.arn
+  description = "The ARN of the role devops are able to assume to attain admin privileges"
+}
+
 output "resource_developer_role_name" {
   value       = aws_iam_role.developer_access_role.name
   description = "The name of the role users are able to assume to attain user privileges"

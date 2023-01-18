@@ -2,7 +2,7 @@
 # AWS Core Modules
 
 This is a collection of Terraform "core" modules I would consider to be building blocks of every reasonable AWS account setup.
-Please refer to to the [AWS Kickstarter](https://github.com/moritzheiber/aws-kickstarter) to see their application.
+Please refer to the [AWS Kickstarter Pro](https://github.com/AndroidNextdoor/aws-kickstarter) to see their application.
 
 Contributions are more than welcome and encouraged!
 
@@ -109,14 +109,14 @@ A module to configure the "users" account modeled after a common security princi
 These strict separation of privileges follow [an article I wrote a while ago](https://www.thoughtworks.com/insights/blog/using-aws-security-first-class-citizen).
 You can also create IAM users and IAM groups with this module and assign the users to specific groups. The module will create two default groups, one for admins and users, which you can disable by setting the `devops_group_name` and `user_group_name` to an empty string.
 
-Creating additional users is done by passing a map called `users` to the module, with a group mapping attached to them (the best practice is to never have users live "outside" of groups).
+Creating additional users is done by passing a map called `Developers` to the module, with a group mapping attached to them (the best practice is to never have users live "outside" of groups).
 
 ```hcl
 variable "iam_users" {
   type = map(map(set(string)))
   default = {
-    my_user = {
-      groups = ["admins"]
+    "developer_name@myorg.com" = {
+      groups = ["Developers"]
     }
   }
 }
