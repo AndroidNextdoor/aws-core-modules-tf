@@ -497,6 +497,7 @@ data "aws_iam_policy_document" "developer_policy" {
       "devicefarm:List*",
       "devicefarm:Create*",
       "devicefarm:Install*",
+      "devicefarm:TagResource",
     ]
 
     condition {
@@ -630,6 +631,7 @@ data "aws_iam_policy_document" "developer_cli_policy" {
       "devicefarm:List*",
       "devicefarm:Create*",
       "devicefarm:Install*",
+      "devicefarm:TagResource",
     ]
 
     condition {
@@ -718,6 +720,7 @@ data "aws_iam_policy_document" "pipeline_policy" {
       "devicefarm:List*",
       "devicefarm:Create*",
       "devicefarm:Install*",
+      "devicefarm:TagResource",
       #       TURN PERMISSIONS ON AS NEEDED ACCORDING TO BEST PRACTICES
       #      "ecr:GetAuthorizationToken",
       #      "ecr:BatchCheckLayerAvailability",
