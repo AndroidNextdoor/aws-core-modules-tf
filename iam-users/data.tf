@@ -499,6 +499,7 @@ data "aws_iam_policy_document" "developer_policy" {
       "devicefarm:Install*",
       "devicefarm:Tag*",
       "devicefarm:Update*",
+      "iam:CreateServiceLinkedRole",
     ]
 
     condition {
@@ -634,6 +635,7 @@ data "aws_iam_policy_document" "developer_cli_policy" {
       "devicefarm:Install*",
       "devicefarm:Tag*",
       "devicefarm:Update*",
+      "iam:CreateServiceLinkedRole",
     ]
 
     condition {
@@ -724,6 +726,7 @@ data "aws_iam_policy_document" "pipeline_policy" {
       "devicefarm:Install*",
       "devicefarm:Tag*",
       "devicefarm:Update*",
+      "iam:CreateServiceLinkedRole",
       #       TURN PERMISSIONS ON AS NEEDED ACCORDING TO BEST PRACTICES
       #      "ecr:GetAuthorizationToken",
       #      "ecr:BatchCheckLayerAvailability",
